@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { ArrowRight } from "lucide-react";
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
             <Image src="/github.svg" alt="GitHub" width={20} height={20} className="w-5 h-5" />
           </Button>
         </a>
+        <ThemeToggle />
         <Button variant="outline" className="flex items-center gap-2">
           Get started
           <ArrowRight className="h-4 w-4" />
