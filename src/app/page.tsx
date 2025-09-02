@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ArrowRight } from "lucide-react";
+import { GitHubIcon } from "@/components/icons/github-icon";
 
 export default function Home() {
   return (
@@ -18,7 +19,7 @@ export default function Home() {
           aria-label="Cutfly on GitHub"
         >
           <Button variant="ghost" size="icon">
-            <Image src="/github.svg" alt="GitHub" width={20} height={20} className="w-5 h-5" />
+            <GitHubIcon className="size-5" />
           </Button>
         </a>
         <ThemeToggle />
