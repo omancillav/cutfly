@@ -13,8 +13,8 @@ export default function Home() {
           squareSize={4}
           gridGap={5}
           color="#6B7280"
-          maxOpacity={0.2}
-          flickerChance={1}
+          maxOpacity={0.3}
+          flickerChance={0.2}
           className="absolute inset-0"
         />
       </div>
