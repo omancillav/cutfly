@@ -1,22 +1,22 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Link2 } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/github-icon";
 import { Meteors } from "@/components/magicui/meteors";
 
 export default function Home() {
   return (
-    <div className="relative h-screen w-full overflow-hidden">
-      <div className="absolute inset-0 z-0 h-screen">
+    <div className="relative min-h-screen w-full overflow-hidden">
+      <div className="absolute inset-0 z-0 min-h-screen">
         <Meteors />
       </div>
 
       <div className="relative z-10">
-        <header className="flex items-center justify-between gap-2 py-4">
+        <header className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between gap-2 py-4">
           <div className="flex items-center gap-2">
             <Image src="/cutfly_logo.webp" alt="Cutfly Logo" width={100} height={100} className="w-8 h-8" />
-            <span className="text-lg font-bold">Cutfly</span>
+            <h1 className="text-lg font-bold">Cutfly</h1>
           </div>
           <div className="flex items-center gap-2">
             <a
@@ -37,8 +37,22 @@ export default function Home() {
           </div>
         </header>
 
-        <main>
-        
+        <main className="min-h-screen w-full flex flex-col items-center justify-center gap-6 md:gap-8 px-2">
+          <h2 className=" text-5xl md:text-6xl font-bold text-center">Fly shorter, reach further</h2>
+          <p className="text-center max-w-3xl text-[15px] md:text-lg">
+            An open-source URL shortener designed for the modern web — fast link creation, detailed analytics, and
+            flexible, customizable features that adapt to individual and team needs.
+          </p>
+          <div className="flex items-center gap-3">
+            <Button variant="default" className="md:text-base p-5 md:p-6">
+              <Link2 className="size-6" />
+              Create a link
+            </Button>
+            <Button variant="outline" className="md:text-base p-5 md:p-6">
+              <GitHubIcon />
+              Star on Github
+            </Button>
+          </div>
         </main>
       </div>
     </div>
