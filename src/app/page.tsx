@@ -19,7 +19,7 @@ export default function Home() {
           aria-label="Cutfly on GitHub"
         >
           <Button variant="ghost" size="icon">
-            <GitHubIcon className="size-5" />
+            <GitHubIcon />
           </Button>
         </a>
         <ThemeToggle />

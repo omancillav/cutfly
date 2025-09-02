@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { inter } from "@/ui/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -22,7 +23,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="max-w-[1440px] mx-auto px-5 w-full">{children}</div>
+          <div className="max-w-[1440px] mx-auto px-5 w-full">
+            {children}
+            <Analytics />
+          </div>
         </ThemeProvider>
       </body>
     </html>
