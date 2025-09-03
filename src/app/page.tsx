@@ -3,20 +3,13 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ArrowRight, Link2 } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/github-icon";
-import { FlickeringGrid } from "@/components/magicui/flickering-grid";
+import { DotPattern } from "@/components/magicui/dot-pattern";
 
 export default function Home() {
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
       <div className="fixed inset-0 z-0 w-screen h-screen">
-        <FlickeringGrid
-          squareSize={4}
-          gridGap={5}
-          color="#6B7280"
-          maxOpacity={0.3}
-          flickerChance={0.2}
-          className="absolute inset-0"
-        />
+        <DotPattern glow={true} className="opacity-60"/>
       </div>
 
       <div className="relative z-10 max-w-[1440px] mx-auto w-full px-3 md:px-6">
