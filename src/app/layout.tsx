@@ -20,13 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="max-w-[1440px] mx-auto px-5 w-full">
-            {children}
-            <Analytics />
-          </div>
+          {children}
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
