@@ -7,7 +7,7 @@ import { DotPattern } from "@/components/magicui/dot-pattern";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
+    <div className="relative min-h-svh w-full overflow-hidden">
       <div className="fixed inset-0 z-0 w-screen h-screen">
         <DotPattern glow={true} className="opacity-60"/>
       </div>
@@ -37,7 +37,7 @@ export default function Home() {
           </div>
         </header>
 
-        <main className="min-h-screen w-full flex flex-col items-center justify-center gap-6 md:gap-8 px-2 -mt-20">
+        <main className="min-h-svh w-full flex flex-col items-center justify-center gap-6 md:gap-8 px-2 -mt-20">
           <h2 className=" text-5xl md:text-6xl font-bold text-center">Fly shorter, reach further</h2>
           <p className="text-center max-w-3xl text-[15px] md:text-lg">
             An open-source URL shortener designed for the modern web — fast link creation, detailed analytics, and
