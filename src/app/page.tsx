@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className="relative min-h-svh w-full overflow-hidden">
       <div className="fixed inset-0 z-0 w-screen h-screen">
-        <DotPattern glow={true} className="opacity-60"/>
+        <DotPattern className="opacity-40" />
       </div>
 
       <div className="relative z-10 max-w-[1440px] mx-auto w-full px-3 md:px-6">
@@ -43,9 +43,9 @@ export default function Home() {
             An open-source URL shortener designed for the modern web — fast link creation, detailed analytics, and
             flexible, customizable features that adapt to individual and team needs.
           </p>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <Button variant="default" className="md:text-base p-5 md:p-6">
-              <Link2 className="size-6" />
+              <Link2 className="size-5" />
               Create a link
             </Button>
             <Button variant="outline" className="md:text-base p-5 md:p-6">
