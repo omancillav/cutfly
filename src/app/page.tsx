@@ -17,11 +17,18 @@ export default function Home() {
 
       <div className="relative z-10 max-w-[1440px] mx-auto w-full px-3 md:px-6">
         <header className="flex items-center justify-between gap-2 py-4">
-          <div className="flex items-center gap-2">
-            <Image src="/cutfly_logo.webp" alt="Cutfly Logo" width={100} height={100} className="w-8 h-8" />
-            <h1 className="text-lg font-bold">Cutfly</h1>
+          <div className="flex items-center gap-2 md:gap-3">
+            <Image
+              src="/cutfly_logo.webp"
+              alt="Cutfly Logo"
+              width={100}
+              height={100}
+              className="w-8 h-8"
+              priority={true}
+            />
+            <h1 className="text-xl font-bold">Cutfly</h1>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 md:gap-3">
             <a
               href="https://github.com/omancillav/cutfly"
               target="_blank"
@@ -41,8 +48,8 @@ export default function Home() {
         </header>
 
         <main className="min-h-svh w-full flex flex-col items-center justify-center gap-6 md:gap-8 px-2 -mt-20">
-          <h2 className="text-5xl md:text-6xl font-bold text-center">Fly shorter, reach further</h2>
-          <p className="text-center max-w-3xl text-[15px] md:text-lg">
+          <h2 className="text-5xl md:text-7xl font-bold text-center">Fly shorter, reach further</h2>
+          <p className="text-center max-w-4xl text-[15px] md:text-xl">
             An open-source URL shortener designed for the modern web — fast link creation, detailed analytics, and
             flexible, customizable features that adapt to individual and team needs.
           </p>
