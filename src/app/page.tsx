@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ArrowRight, Link2 } from "lucide-react";
-import { GitHubIcon } from "@/components/icons/github-icon";
+import { GitHubIcon } from "@/assets/github-icon";
 import { AnimatedGridPattern } from "@/components/magicui/animated-grid-pattern";
 
 export default function Home() {
@@ -48,8 +48,8 @@ export default function Home() {
         </header>
 
         <main className="min-h-svh w-full flex flex-col items-center justify-center gap-6 md:gap-8 px-2 -mt-20">
-          <h2 className="text-5xl md:text-7xl font-bold text-center">Fly shorter, Reach further</h2>
-          <p className="text-center max-w-4xl text-[15px] md:text-xl">
+          <h2 className="text-5xl md:text-6xl font-bold text-center">Fly shorter, Reach further</h2>
+          <p className="text-center max-w-4xl text-[15px] md:text-lg">
             An open-source URL shortener designed for the modern web — fast link creation, detailed analytics, and
             flexible, customizable features that adapt to individual and team needs.
           </p>
