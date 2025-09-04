@@ -3,13 +3,16 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ArrowRight, Link2 } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/github-icon";
-import { DotPattern } from "@/components/magicui/dot-pattern";
+import { AnimatedGridPattern } from "@/components/magicui/animated-grid-pattern";
 
 export default function Home() {
   return (
     <div className="relative min-h-svh w-full overflow-hidden">
       <div className="fixed inset-0 z-0 w-screen h-screen">
-        <DotPattern className="opacity-40" />
+        <AnimatedGridPattern
+          maxOpacity={0.05}
+          className="[mask-image:radial-gradient(ellipse_at_center,white_40%,transparent_90%)]"
+        />
       </div>
 
       <div className="relative z-10 max-w-[1440px] mx-auto w-full px-3 md:px-6">
@@ -38,7 +41,7 @@ export default function Home() {
         </header>
 
         <main className="min-h-svh w-full flex flex-col items-center justify-center gap-6 md:gap-8 px-2 -mt-20">
-          <h2 className=" text-5xl md:text-6xl font-bold text-center">Fly shorter, reach further</h2>
+          <h2 className="text-5xl md:text-6xl font-bold text-center">Fly shorter, reach further</h2>
           <p className="text-center max-w-3xl text-[15px] md:text-lg">
             An open-source URL shortener designed for the modern web — fast link creation, detailed analytics, and
             flexible, customizable features that adapt to individual and team needs.
@@ -48,10 +51,17 @@ export default function Home() {
               <Link2 className="size-5" />
               Create a link
             </Button>
-            <Button variant="outline" className="md:text-base p-5 md:p-6">
-              <GitHubIcon />
-              Star on Github
-            </Button>
+            <a
+              href="https://github.com/omancillav/cutfly"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Cutfly on GitHub"
+            >
+              <Button variant="secondary" className="md:text-base p-5 md:p-6 border bg-background">
+                <GitHubIcon />
+                Star on Github
+              </Button>
+            </a>
           </div>
         </main>
       </div>
