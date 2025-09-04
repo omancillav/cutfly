@@ -41,14 +41,14 @@ export default function Home() {
             </a>
             <ThemeToggle />
             <Button variant="outline" className="flex items-center gap-2 !bg-background">
-              Get started
+              Dashboard
               <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
         </header>
 
         <main className="min-h-svh w-full flex flex-col items-center justify-center gap-6 md:gap-8 px-2 -mt-20">
-          <h2 className="text-5xl md:text-7xl font-bold text-center">Fly shorter, reach further</h2>
+          <h2 className="text-5xl md:text-7xl font-bold text-center">Fly shorter, Reach further</h2>
           <p className="text-center max-w-4xl text-[15px] md:text-xl">
             An open-source URL shortener designed for the modern web — fast link creation, detailed analytics, and
             flexible, customizable features that adapt to individual and team needs.
@@ -56,7 +56,7 @@ export default function Home() {
           <div className="flex items-center gap-4">
             <Button variant="default" className="md:text-base p-5 md:p-6">
               <Link2 className="size-5" />
-              Create a link
+              Shorten a link
             </Button>
             <a
               href="https://github.com/omancillav/cutfly"
@@ -70,6 +70,7 @@ export default function Home() {
               </Button>
             </a>
           </div>
+          <footer className="absolute bottom-4 text-sm text-center text-muted-foreground">Made by Omar Mancilla</footer>
         </main>
       </div>
     </div>
