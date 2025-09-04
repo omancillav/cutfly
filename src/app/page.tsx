@@ -16,7 +16,7 @@ export default function Home() {
       </div>
 
       <div className="relative z-10 max-w-[1440px] mx-auto w-full px-3 md:px-6">
-        <header className="flex items-center justify-between gap-2 py-4">
+        <header className="flex items-center justify-between gap-2 py-2 md:py-4">
           <div className="flex items-center gap-2 md:gap-3">
             <Image
               src="/cutfly_logo.webp"
@@ -70,7 +70,7 @@ export default function Home() {
               </Button>
             </a>
           </div>
-          <footer className="absolute bottom-4 text-sm text-center text-muted-foreground">Made by Omar Mancilla</footer>
+          <footer className="absolute bottom-2 md:bottom-4 text-sm text-center text-muted-foreground">Made by Omar Mancilla</footer>
         </main>
       </div>
     </div>
