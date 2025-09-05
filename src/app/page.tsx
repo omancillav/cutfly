@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ArrowRight, Link2 } from "lucide-react";
@@ -40,10 +41,12 @@ export default function Home() {
               </Button>
             </a>
             <ThemeToggle />
-            <Button variant="outline" className="flex items-center gap-2 !bg-background">
-              Dashboard
-              <ArrowRight className="h-4 w-4" />
-            </Button>
+            <Link href="/dashboard">
+              <Button variant="outline" className="flex items-center gap-2 !bg-background">
+                Dashboard
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </header>
 
@@ -54,10 +57,12 @@ export default function Home() {
             flexible, customizable features that adapt to individual and team needs.
           </p>
           <div className="flex items-center gap-4">
-            <Button variant="default" className="md:text-base p-5 md:p-6">
-              <Link2 className="size-5" />
-              Shorten a link
-            </Button>
+            <Link href="/dashboard">
+              <Button variant="default" className="md:text-base p-5 md:p-6">
+                <Link2 className="size-5" />
+                Shorten a link
+              </Button>
+            </Link>
             <a
               href="https://github.com/omancillav/cutfly"
               target="_blank"
