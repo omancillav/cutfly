@@ -15,7 +15,7 @@ export default function Home() {
         />
       </div>
 
-      <div className="relative z-10 max-w-[1440px] mx-auto w-full px-3 md:px-6">
+      <div className="relative z-10 max-w-[1440px] mx-auto w-full px-3 md:px-6 min-h-svh flex flex-col">
         <header className="flex items-center justify-between gap-2 py-2 md:py-4">
           <div className="flex items-center gap-2 md:gap-3">
             <Image
@@ -47,7 +47,7 @@ export default function Home() {
           </div>
         </header>
 
-        <main className="min-h-svh w-full flex flex-col items-center justify-center gap-6 md:gap-8 px-2 -mt-20">
+        <main className="w-full flex-1 flex flex-col items-center justify-center gap-6 md:gap-8 px-2 md:mt-0 -mt-6">
           <h2 className="text-5xl md:text-6xl font-bold text-center">Fly shorter, Reach further</h2>
           <p className="text-center max-w-4xl text-[15px] md:text-lg">
             An open-source URL shortener designed for the modern web — fast link creation, detailed analytics, and
@@ -70,8 +70,9 @@ export default function Home() {
               </Button>
             </a>
           </div>
-          <footer className="absolute bottom-2 md:bottom-4 text-sm text-center text-muted-foreground">Made by Omar Mancilla</footer>
         </main>
+
+        <footer className="mt-auto py-4 text-sm text-center text-muted-foreground">Made by Omar Mancilla</footer>
       </div>
     </div>
   );
