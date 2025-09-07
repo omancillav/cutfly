@@ -29,16 +29,22 @@ export function ThemeToggle() {
         <DropdownMenuLabel>Theme</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => setTheme("light")}>
-          <Sun className="mr-1 h-4 w-4" />
+          <div className="flex items-center gap-2 justify-between w-full">
           Light
+          <Sun className="h-4 w-4" />
+          </div>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
-          <Moon className="mr-1 h-4 w-4" />
-          Dark
+          <div className="flex items-center gap-2 justify-between w-full">
+            Dark
+            <Moon className="h-4 w-4" />
+          </div>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
-          <LaptopMinimal className="mr-1 h-4 w-4" />
-          System
+          <div className="flex items-center gap-2 justify-between w-full">
+            System
+            <LaptopMinimal className="h-4 w-4" />
+          </div>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
