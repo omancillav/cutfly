@@ -1,10 +1,5 @@
 import type { Adapter } from "next-auth/adapters"
-import { createClient } from '@libsql/client'
-
-const db = createClient({
-  url: process.env.TURSO_DATABASE_URL!,
-  authToken: process.env.TURSO_AUTH_TOKEN!,
-})
+import { turso as db } from './turso-client'
 
 export function createTursoAdapter(): Adapter {
   return {

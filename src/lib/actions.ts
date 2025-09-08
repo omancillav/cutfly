@@ -1,9 +1,6 @@
-import { createClient } from "@libsql/client";
+"use server";
 
-const turso = createClient({
-  url: process.env.TURSO_DATABASE_URL || "",
-  authToken: process.env.TURSO_AUTH_TOKEN || "",
-});
+import { turso } from "./turso-client";
 
 interface LinkData {
   url: string;
@@ -22,4 +19,9 @@ export const createLink = async (data: LinkData) => {
     data.title,
   ]);
   return res.rows[0];
+};
+
+export const deleteLink = async (code: string) => {
+  const res = await turso.execute("DELETE FROM links WHERE code = ?", [code]);
+  return res;
 };
