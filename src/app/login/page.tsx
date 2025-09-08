@@ -1,0 +1,31 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardTitle, CardHeader, CardDescription } from "@/components/ui/card";
+import { GitHubIcon } from "@/assets/github-icon";
+import Image from "next/image";
+
+export default function AuthPanel() {
+  return (
+    <main className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] mx-w-[1440px] px-3 md:px-6 mx-auto">
+      <Card className="min-w-[400px] text-center">
+        <CardHeader className="flex flex-col items-center justify-center gap-3">
+          <Image
+            src="/cutfly_logo.webp"
+            alt="Cutfly Logo"
+            width={100}
+            height={100}
+            className="w-15 h-15"
+            priority={true}
+          />
+          <CardTitle className="text-xl font-bold">Log in to Cutfly</CardTitle>
+          <CardDescription>Please log in using your GitHub account</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button variant="outline" className="w-full">
+            <GitHubIcon />
+            Continue with GitHub
+          </Button>
+        </CardContent>
+      </Card>
+    </main>
+  );
+}
