@@ -1,11 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { GitHubIcon } from "@/assets/github-icon";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { auth, signOut } from "@/lib/auth-actions";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ArrowRight } from "lucide-react";
 
-export function Header() {
+export async function Header() {
+  const session = await auth();
+
   return (
     <header className="flex items-center justify-between gap-2 py-2 md:py-4">
       <Link href="/">
@@ -33,12 +43,52 @@ export function Header() {
           </Button>
         </a>
         <ThemeToggle />
-        <Link href="/login">
-          <Button variant="outline" className="flex items-center gap-2 !bg-background">
-            Dashboard
-            <ArrowRight className="h-4 w-4" />
-          </Button>
-        </Link>
+
+        {session?.user ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <Image
+                  src={`https://api.dicebear.com/9.x/glass/webp?seed=${encodeURIComponent(
+                    session.user.email || session.user.name || "default"
+                  )}`}
+                  alt="Profile"
+                  width={30}
+                  height={30}
+                  className="w-8 h-8 rounded-full"
+                />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <div className=" flex flex-col gap-1 px-2 py-1.5 text-sm font-medium">
+                {session.user.name}
+                <span className="text-xs text-muted-foreground">{session.user.email}</span>
+              </div>
+              <DropdownMenuItem asChild>
+                <form
+                  action={async () => {
+                    "use server";
+                    await signOut();
+                  }}
+                >
+                  <Button type="submit" variant="ghost" className="w-full p-0">
+                    <div className="flex items-center gap-10 justify-between w-full py-1.5   text-sm">
+                      Sign out
+                      <LogOut className="h-4 w-4" />
+                    </div>
+                  </Button>
+                </form>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <Link href="/login">
+            <Button variant="outline" className="!bg-background">
+              Get Started
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
+        )}
       </div>
     </header>
   );

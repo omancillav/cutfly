@@ -2,11 +2,20 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle, CardHeader, CardDescription } from "@/components/ui/card";
 import { GitHubIcon } from "@/assets/github-icon";
 import Image from "next/image";
+import { signIn, auth } from "@/lib/auth-actions";
+import { redirect } from "next/navigation";
 
-export default function AuthPanel() {
+export default async function AuthPanel() {
+  const session = await auth();
+  
+  // Si ya hay sesión activa, redirigir al dashboard
+  if (session?.user) {
+    redirect("/dashboard");
+  }
+
   return (
     <main className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)]">
-      <Card className="min-w-[400px] text-center">
+      <Card className="min-w-[300px] md:min-w-[400px] text-center">
         <CardHeader className="flex flex-col items-center justify-center gap-3">
           <Image
             src="/cutfly_logo.webp"
@@ -20,10 +29,17 @@ export default function AuthPanel() {
           <CardDescription>Please log in using your GitHub account</CardDescription>
         </CardHeader>
         <CardContent>
-          <Button variant="outline" className="w-full">
-            <GitHubIcon />
-            Continue with GitHub
-          </Button>
+          <form
+            action={async () => {
+              "use server";
+              await signIn();
+            }}
+          >
+            <Button type="submit" variant="outline" className="w-full">
+              <GitHubIcon />
+              Continue with GitHub
+            </Button>
+          </form>
         </CardContent>
       </Card>
     </main>

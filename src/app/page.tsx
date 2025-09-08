@@ -21,7 +21,7 @@ export default function Home() {
           flexible, customizable features that adapt to individual and team needs.
         </p>
         <div className="flex items-center gap-4">
-          <Link href="/login">
+          <Link href="/dashboard">
             <Button variant="default" className="md:text-base p-5 md:p-6">
               <Link2 className="size-5" />
               Shorten a link
