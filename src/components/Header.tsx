@@ -53,9 +53,9 @@ export async function Header() {
                     session.user.email || session.user.name || "default"
                   )}`}
                   alt="Profile"
-                  width={30}
-                  height={30}
-                  className="w-8 h-8 rounded-full"
+                  width={35}
+                  height={35}
+                  className="w-7 h-7 rounded-full"
                 />
               </Button>
             </DropdownMenuTrigger>
