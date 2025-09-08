@@ -108,32 +108,9 @@ export function createTursoAdapter(): Adapter {
       )
     },
 
-    async linkAccount(account) {
-      // Para GitHub, actualizamos el github_id del usuario
-      if (account.provider === 'github') {
-        await db.execute(
-          `UPDATE users SET github_id = ? WHERE id = ?`,
-          [String(account.providerAccountId), String(account.userId)]
-        )
-      }
-      return account
-    },
-
-    async unlinkAccount({ providerAccountId, provider }) {
-      if (provider === 'github') {
-        await db.execute(
-          `UPDATE users SET github_id = NULL WHERE github_id = ?`,
-          [String(providerAccountId)]
-        )
-      }
-    },
-
     async createVerificationToken({ identifier, expires, token }) {
       return { identifier, expires, token }
     },
 
-    async useVerificationToken() {
-      return null
-    },
   }
 }
