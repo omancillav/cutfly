@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function AuthPanel() {
   return (
-    <main className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] mx-w-[1440px] px-3 md:px-6 mx-auto">
+    <main className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)]">
       <Card className="min-w-[400px] text-center">
         <CardHeader className="flex flex-col items-center justify-center gap-3">
           <Image

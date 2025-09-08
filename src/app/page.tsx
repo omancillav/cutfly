@@ -7,7 +7,7 @@ import { AnimatedGridPattern } from "@/components/magicui/animated-grid-pattern"
 export default function Home() {
   return (
     <div className="relative w-full overflow-hidden">
-      <div className="fixed inset-0 z-0 w-screen h-screen">
+      <div className="fixed inset-0 -z-10 w-screen h-screen pointer-events-none">
         <AnimatedGridPattern
           maxOpacity={0.05}
           className="[mask-image:radial-gradient(ellipse_at_center,white_40%,transparent_90%)]"
