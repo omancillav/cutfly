@@ -8,7 +8,6 @@ import { redirect } from "next/navigation";
 export default async function AuthPanel() {
   const session = await auth();
   
-  // Si ya hay sesión activa, redirigir al dashboard
   if (session?.user) {
     redirect("/dashboard");
   }
