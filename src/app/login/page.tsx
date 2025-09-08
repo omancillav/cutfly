@@ -2,11 +2,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle, CardHeader, CardDescription } from "@/components/ui/card";
 import { GitHubIcon } from "@/assets/github-icon";
 import Image from "next/image";
-import { getUsers } from "@/lib/actions";
+import { signIn, auth } from "@/lib/auth-actions";
+import { redirect } from "next/navigation";
 
 export default async function AuthPanel() {
-  const users = await getUsers();
-  console.log(users);
+  const session = await auth();
+  
+  // Si ya hay sesión activa, redirigir al dashboard
+  if (session?.user) {
+    redirect("/dashboard");
+  }
 
   return (
     <main className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)]">
@@ -24,10 +29,17 @@ export default async function AuthPanel() {
           <CardDescription>Please log in using your GitHub account</CardDescription>
         </CardHeader>
         <CardContent>
-          <Button variant="outline" className="w-full">
-            <GitHubIcon />
-            Continue with GitHub
-          </Button>
+          <form
+            action={async () => {
+              "use server";
+              await signIn();
+            }}
+          >
+            <Button type="submit" variant="outline" className="w-full">
+              <GitHubIcon />
+              Continue with GitHub
+            </Button>
+          </form>
         </CardContent>
       </Card>
     </main>
