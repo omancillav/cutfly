@@ -48,21 +48,15 @@ export async function Header() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="rounded-full">
-                {session.user.image ? (
-                  <Image
-                    src={session.user.image}
-                    alt="Profile"
-                    width={32}
-                    height={32}
-                    className="w-8 h-8 rounded-full"
-                  />
-                ) : (
-                  <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                    <span className="text-sm font-semibold">
-                      {(session.user.name?.charAt(0) || session.user.email?.charAt(0) || "U").toUpperCase()}
-                    </span>
-                  </div>
-                )}
+                <Image
+                  src={`https://api.dicebear.com/9.x/glass/webp?seed=${encodeURIComponent(
+                    session.user.email || session.user.name || "default"
+                  )}`}
+                  alt="Profile"
+                  width={30}
+                  height={30}
+                  className="w-8 h-8 rounded-full"
+                />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -77,10 +71,12 @@ export async function Header() {
                     await signOut();
                   }}
                 >
-                  <div className="flex items-center gap-10 justify-between w-full py-1.5   text-sm">
-                    Sign out
-                    <LogOut className="h-4 w-4" />
-                  </div>
+                  <Button type="submit" variant="ghost" className="w-full p-0">
+                    <div className="flex items-center gap-10 justify-between w-full py-1.5   text-sm">
+                      Sign out
+                      <LogOut className="h-4 w-4" />
+                    </div>
+                  </Button>
                 </form>
               </DropdownMenuItem>
             </DropdownMenuContent>
