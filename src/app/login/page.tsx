@@ -2,11 +2,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle, CardHeader, CardDescription } from "@/components/ui/card";
 import { GitHubIcon } from "@/assets/github-icon";
 import Image from "next/image";
+import { getUsers } from "@/lib/actions";
 
-export default function AuthPanel() {
+export default async function AuthPanel() {
+  const users = await getUsers();
+  console.log(users);
+
   return (
     <main className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)]">
-      <Card className="min-w-[400px] text-center">
+      <Card className="min-w-[300px] md:min-w-[400px] text-center">
         <CardHeader className="flex flex-col items-center justify-center gap-3">
           <Image
             src="/cutfly_logo.webp"
