@@ -2,7 +2,8 @@ import { auth } from "@/lib/auth-actions";
 import { redirect } from "next/navigation";
 import { getLinksByUserId } from "@/lib/data";
 import { LinkCard } from "@/components/LinkCard";
-import { CreateButton } from "./CreateButton";
+import { CreateButton } from "@/components/CreateButton";
+import { NoLinks } from "@/components/NoLinks";
 
 export default async function Dashboard() {
   const session = await auth();
@@ -28,7 +29,7 @@ export default async function Dashboard() {
 
       <div className="w-full">
         {links.length === 0 ? (
-          <p className="text-muted-foreground">You have not created any links yet.</p>
+          <NoLinks />
         ) : (
           <ul>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 w-full">
