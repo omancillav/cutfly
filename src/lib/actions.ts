@@ -35,3 +35,13 @@ export const deleteLink = async (code: string) => {
     throw new Error("Failed to delete link");
   }
 };
+
+export const incrementClicks = async (code: string) => {
+  try {
+    await turso.execute("UPDATE links SET clicks = clicks + 1 WHERE code = ?", [code]);
+    return { success: true, message: "Link clicks incremented successfully" };
+  } catch (error) {
+    console.error("Error in incrementClicks:", error);
+    throw new Error("Failed to increment link clicks");
+  }
+};
