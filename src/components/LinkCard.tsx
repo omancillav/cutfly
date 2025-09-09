@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChartNoAxesColumn } from "lucide-react";
-import Link from "next/link";
+import { ChartNoAxesColumn, Link2 } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import { Actions } from "./actions";
+import Link from "next/link";
 
 interface Link {
   code: string;
@@ -35,6 +35,7 @@ export function LinkCard({ link }: { link: Link }) {
           target="_blank"
           rel="noopener noreferrer"
         >
+          <Link2 size={16} className="inline mr-1" />
           {link.url}
         </Link>
         <span className="text-sm text-end flex justify-end">{formatDate(link.created_at)}</span>

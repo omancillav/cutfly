@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth-actions";
 import { redirect } from "next/navigation";
 import { getLinksByUserId } from "@/lib/data";
 import { LinkCard } from "@/components/LinkCard";
+import { CreateButton } from "./CreateButton";
 
 export default async function Dashboard() {
   const session = await auth();
@@ -13,10 +14,16 @@ export default async function Dashboard() {
   const links = await getLinksByUserId(Number(session.user.id));
 
   return (
-    <div className="py-4 w-full">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <p className="text-muted-foreground">Welcome back, {session?.user?.name || "User"}!</p>
+    <div className="py-4 w-full flex flex-col">
+      <div className="grid grid-cols-1 md:grid-cols-2 items-end gap-4 mb-3 md:mb-4">
+        <div className="flex flex-col gap-1">
+          <h1 className="text-3xl font-bold">Dashboard</h1>
+          <p className="text-muted-foreground">Welcome back, {session?.user?.name || "User"}!</p>
+        </div>
+
+        <div className="flex justify-end">
+          <CreateButton />
+        </div>
       </div>
 
       <div className="w-full">

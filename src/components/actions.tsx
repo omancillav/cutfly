@@ -22,9 +22,9 @@ export function Actions({ linkCode }: { linkCode: string }) {
 
   return (
     <div className="flex items-center gap-3">
-      <Copy onClick={handleCopy} size={18} className="cursor-pointer hover:opacity-80" />
-      <Pen size={18} className="cursor-pointer hover:opacity-80" />
-      <Trash onClick={handleDelete} size={18} className="cursor-pointer hover:opacity-80  " />
+      <Copy onClick={handleCopy} size={16} className="cursor-pointer hover:opacity-80" />
+      <Pen size={16} className="cursor-pointer hover:opacity-80" />
+      <Trash onClick={handleDelete} size={16} className="cursor-pointer hover:opacity-80  " />
     </div>
   );
 }
