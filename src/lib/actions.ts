@@ -22,6 +22,16 @@ export const createLink = async (data: LinkData) => {
 };
 
 export const deleteLink = async (code: string) => {
-  const res = await turso.execute("DELETE FROM links WHERE code = ?", [code]);
-  return res;
+  try {
+    const res = await turso.execute("DELETE FROM links WHERE code = ?", [code]);
+
+    if (res.rowsAffected === 0) {
+      throw new Error("Link not found");
+    }
+
+    return { success: true, message: "Link deleted successfully" };
+  } catch (error) {
+    console.error("Error in deleteLink:", error);
+    throw new Error("Failed to delete link");
+  }
 };

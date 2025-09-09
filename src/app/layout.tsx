@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { inter } from "@/ui/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
 import { Header } from "@/components/Header";
 import "./globals.css";
@@ -28,6 +29,7 @@ export default function RootLayout({
             <div className="relative z-10 max-w-[1440px] mx-auto w-full px-3 md:px-6 min-h-svh flex flex-col">
               <Header />
               <main className="flex-1">{children}</main>
+              <Toaster position="bottom-right" richColors />
             </div>
           </div>
           <Analytics />
