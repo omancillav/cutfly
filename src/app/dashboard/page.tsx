@@ -4,6 +4,7 @@ import { getLinksByUserId } from "@/lib/data";
 import { LinkCard } from "@/components/LinkCard";
 import { CreateButton } from "@/components/CreateButton";
 import { NoLinks } from "@/components/NoLinks";
+import { Box } from "lucide-react";
 
 export default async function Dashboard() {
   const session = await auth();
@@ -13,22 +14,25 @@ export default async function Dashboard() {
   }
 
   const links = await getLinksByUserId(Number(session.user.id));
+  const linksCount = links.length;
 
   return (
     <div className="py-4 w-full flex flex-col">
-      <div className="grid grid-cols-1 md:grid-cols-2 items-end gap-4 mb-3 md:mb-4">
-        <div className="flex flex-col gap-1">
-          <h1 className="text-3xl font-bold">Dashboard</h1>
-          <p className="text-muted-foreground">Welcome back, {session?.user?.name || "User"}!</p>
+      <div className="flex justify-between items-center gap-2 mb-3 md:mb-4">
+        <div className="flex justify-start">
+          <div className="flex items-center gap-2 border px-4 py-2 rounded-md text-sm">
+            <Box className="w-4 h-4" />
+            <span>{linksCount.toString().padStart(2, "0")}/30</span>
+          </div>
         </div>
 
-        <div className="flex justify-end">
+        <div className="flex justify-end w-full">
           <CreateButton />
         </div>
       </div>
 
       <div className="w-full">
-        {links.length === 0 ? (
+        {linksCount === 0 ? (
           <NoLinks />
         ) : (
           <ul>
