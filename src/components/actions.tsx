@@ -1,10 +1,15 @@
 "use client";
+import { useState } from "react";
 import { Copy, Pen, Trash } from "lucide-react";
 import { deleteLink } from "@/lib/actions";
 import { toast } from "sonner";
+import { ConfirmationDialog } from "./ConfirmationDialog";
 
 export function Actions({ linkCode }: { linkCode: string }) {
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const handleDelete = async () => {
+    setIsDeleting(true);
     toast.promise(deleteLink(linkCode), {
       loading: "Deleting link...",
       success: () => {
@@ -13,6 +18,7 @@ export function Actions({ linkCode }: { linkCode: string }) {
       },
       error: "Failed to delete link",
     });
+    setIsDeleting(false);
   };
 
   const handleCopy = () => {
@@ -30,7 +36,13 @@ export function Actions({ linkCode }: { linkCode: string }) {
     <div className="flex items-center gap-3">
       <Copy onClick={handleCopy} size={16} className="cursor-pointer hover:opacity-80" />
       <Pen size={16} className="cursor-pointer hover:opacity-80" />
-      <Trash onClick={handleDelete} size={16} className="cursor-pointer hover:opacity-80  " />
+      <ConfirmationDialog 
+        onConfirm={handleDelete}
+        isLoading={isDeleting}
+        trigger={
+          <Trash size={16} className="cursor-pointer hover:opacity-80" />
+        }
+      />
     </div>
   );
 }
