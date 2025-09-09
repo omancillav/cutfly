@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartNoAxesColumn } from "lucide-react";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
@@ -14,11 +14,11 @@ interface Link {
 
 export function LinkCard({ link }: { link: Link }) {
   return (
-    <Card>
+    <Card className="gap-2">
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle>/{link.code}</CardTitle>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <p className="text-sm flex items-center gap-1">
               <ChartNoAxesColumn size={16} />
               {link.clicks} clicks
@@ -27,12 +27,11 @@ export function LinkCard({ link }: { link: Link }) {
             <Actions linkCode={link.code} />
           </div>
         </div>
-        <CardDescription className="text-sm text-muted-foreground">{link.description}</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col gap-2">
         <Link
           href={link.url}
-          className="text-sm text-muted-foreground line-clamp-1"
+          className="text-sm text-muted-foreground line-clamp-1 break-all hover:underline"
           target="_blank"
           rel="noopener noreferrer"
         >
