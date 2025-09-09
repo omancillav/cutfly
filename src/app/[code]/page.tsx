@@ -10,7 +10,7 @@ interface PageProps {
 }
 
 export default async function RedirectPage({ params }: PageProps) {
-  const { code } = params;
+  const { code } = await params;
 
   let link;
 
