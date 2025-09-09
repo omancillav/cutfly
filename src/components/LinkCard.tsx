@@ -14,7 +14,7 @@ interface Link {
 
 export function LinkCard({ link }: { link: Link }) {
   return (
-    <Card className="gap-2">
+    <Card className="gap-2 bg-background">
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle>/{link.code}</CardTitle>
