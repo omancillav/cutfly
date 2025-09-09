@@ -11,3 +11,9 @@ export const getLinksByUserId = async (userId: number) => {
   const res = await turso.execute(query, [userId]);
   return res.rows;
 };
+
+export const getLinkByCode = async (code: string) => {
+  const query = "SELECT * FROM links WHERE code = ?";
+  const res = await turso.execute(query, [code]);
+  return res.rows[0];
+}
