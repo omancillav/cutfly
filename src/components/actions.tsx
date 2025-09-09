@@ -16,8 +16,14 @@ export function Actions({ linkCode }: { linkCode: string }) {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(`${window.location.origin}/${linkCode}`);
-    toast.success("Link copied to clipboard!");
+    const fullLink = `${window.location.origin}/${linkCode}`;
+    navigator.clipboard.writeText(fullLink);
+    toast.success(
+      <div>
+        <div>Link copied to clipboard!</div>
+        <div className="text-muted-foreground">{fullLink}</div>
+      </div>
+    );
   };
 
   return (
