@@ -29,7 +29,7 @@ export default function RootLayout({
             <div className="relative z-10 max-w-[1440px] mx-auto w-full px-3 md:px-6 min-h-svh flex flex-col">
               <Header />
               <main className="flex-1">{children}</main>
-              <Toaster position="bottom-right" richColors />
+              <Toaster position="bottom-right" />
             </div>
           </div>
           <Analytics />
