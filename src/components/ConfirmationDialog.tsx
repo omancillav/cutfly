@@ -80,7 +80,7 @@ export function ConfirmationDialog({
       <DrawerTrigger asChild>{trigger || defaultTrigger}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <TriangleAlert className="mx-auto w-25 h-25 my-4" />
+          <TriangleAlert className="mx-auto w-25 h-25 my-4 text-destructive" />
           <DrawerTitle className="text-lg">{title}</DrawerTitle>
           <DrawerDescription>{description}</DrawerDescription>
         </DrawerHeader>
