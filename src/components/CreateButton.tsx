@@ -10,9 +10,11 @@ export function CreateButton() {
   };
 
   return (
-    <Button onClick={handleClick} variant="outline" className="w-full md:w-fit !bg-background">
-      Create link
-      <Link size={16} />
+    <Button onClick={handleClick} className="w-full md:w-fit">
+      <div className="flex items-center gap-2">
+        Create link
+        <Link size={16} />
+      </div>
     </Button>
   );
 }
