@@ -7,34 +7,56 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { linkFormSchema } from "@/schemas/LinkSchema";
-import { createLink } from "@/lib/actions";
+import { createLink, updateLink } from "@/lib/actions";
 
 type LinkFormValues = z.infer<typeof linkFormSchema>;
 
-interface LinkFormProps {
-  onSuccess: () => void;
+interface Link {
+  code: string;
+  url: string;
+  description?: string;
+  clicks: number;
+  created_at: string;
 }
 
-export function LinkForm({ onSuccess }: LinkFormProps) {
+interface LinkFormProps {
+  onSuccess: () => void;
+  editMode?: boolean;
+  linkData?: Link;
+}
+
+export function LinkForm({ onSuccess, editMode = false, linkData }: LinkFormProps) {
   const form = useForm<LinkFormValues>({
     resolver: zodResolver(linkFormSchema),
     defaultValues: {
-      url: "",
-      code: "",
-      description: "",
+      url: linkData?.url || "",
+      code: linkData?.code || "",
+      description: linkData?.description || "",
     },
   });
 
   const onSubmit = async (values: LinkFormValues) => {
     try {
-      const result = await createLink({
-        url: values.url,
-        code: values.code,
-        description: values.description,
-      });
+      let result;
+
+      if (editMode && linkData) {
+        // Modo edición
+        result = await updateLink(linkData.code, {
+          url: values.url,
+          code: values.code,
+          description: values.description,
+        });
+      } else {
+        // Modo creación
+        result = await createLink({
+          url: values.url,
+          code: values.code,
+          description: values.description,
+        });
+      }
 
       if (result.success) {
-        toast.success("Link created successfully!", {
+        toast.success(editMode ? "Link updated successfully!" : "Link created successfully!", {
           description: `Short code: ${values.code}`,
         });
 
@@ -56,13 +78,13 @@ export function LinkForm({ onSuccess }: LinkFormProps) {
             description: "Please log in to create links",
           });
         } else {
-          toast.error("Failed to create link", {
+          toast.error(editMode ? "Failed to update link" : "Failed to create link", {
             description: result.error,
           });
         }
       }
     } catch (error) {
-      console.error("Unexpected error creating link:", error);
+      console.error("Unexpected error:", error);
       toast.error("Unexpected error", {
         description: "Something went wrong. Please try again.",
       });
@@ -106,7 +128,6 @@ export function LinkForm({ onSuccess }: LinkFormProps) {
                   autoComplete="off"
                   onChange={(e) => {
                     field.onChange(e);
-                    // Limpiar error del código cuando el usuario empiece a escribir
                     if (form.formState.errors.code?.type === "manual") {
                       form.clearErrors("code");
                     }
@@ -153,7 +174,13 @@ export function LinkForm({ onSuccess }: LinkFormProps) {
             Cancel
           </Button>
           <Button type="submit" disabled={form.formState.isSubmitting} className="w-full md:w-fit">
-            {form.formState.isSubmitting ? "Creating..." : "Create Link"}
+            {form.formState.isSubmitting
+              ? editMode
+                ? "Updating..."
+                : "Creating..."
+              : editMode
+              ? "Update Link"
+              : "Create Link"}
           </Button>
         </div>
       </form>

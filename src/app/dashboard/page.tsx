@@ -41,7 +41,7 @@ export default async function Dashboard() {
                 const code = String(link.code);
                 const clicks = Number(link.clicks);
                 const url = String(link.url);
-                const description = String(link.description);
+                const description = link.description ? String(link.description) : "";
                 const created_at = String(link.created_at);
                 return <LinkCard key={String(link.id)} link={{ code, url, description, clicks, created_at }} />;
               })}
