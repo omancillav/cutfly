@@ -2,7 +2,7 @@ import { auth } from "@/lib/auth-actions";
 import { redirect } from "next/navigation";
 import { getLinksByUserId } from "@/lib/data";
 import { LinkCard } from "@/components/LinkCard";
-import { LinkForm } from "@/components/LinkForm";
+import { LinkFormModal } from "@/components/LinkFormModal";
 import { NoLinks } from "@/components/NoLinks";
 import { Box } from "lucide-react";
 
@@ -27,7 +27,7 @@ export default async function Dashboard() {
         </div>
 
         <div className="flex justify-end w-full">
-          <LinkForm linksCount={linksCount} />
+          <LinkFormModal linksCount={linksCount} />
         </div>
       </div>
 
