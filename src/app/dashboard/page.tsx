@@ -2,7 +2,7 @@ import { auth } from "@/lib/auth-actions";
 import { redirect } from "next/navigation";
 import { getLinksByUserId } from "@/lib/data";
 import { LinkCard } from "@/components/LinkCard";
-import { CreateButton } from "@/components/CreateButton";
+import { LinkFormModal } from "@/components/LinkFormModal";
 import { NoLinks } from "@/components/NoLinks";
 import { Box } from "lucide-react";
 
@@ -27,7 +27,7 @@ export default async function Dashboard() {
         </div>
 
         <div className="flex justify-end w-full">
-          <CreateButton />
+          <LinkFormModal linksCount={linksCount} />
         </div>
       </div>
 
@@ -36,7 +36,7 @@ export default async function Dashboard() {
           <NoLinks />
         ) : (
           <ul>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
               {links.map((link) => {
                 const code = String(link.code);
                 const clicks = Number(link.clicks);

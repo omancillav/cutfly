@@ -1,5 +1,4 @@
 import { Link } from "lucide-react";
-import { CreateButton } from "./CreateButton";
 
 export function NoLinks() {
   return (
@@ -9,7 +8,6 @@ export function NoLinks() {
       <p className="text-muted-foreground text-sm mb-5 text-center">
         You have not created any links yet. Click the button below to create your first link.
       </p>
-      <CreateButton />
     </div>
   );
 }
