@@ -104,11 +104,11 @@ export function LinkForm({ onSuccess, editMode = false, linkData }: LinkFormProp
           name="url"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>URL</FormLabel>
+              <FormLabel className="text-sm">URL</FormLabel>
               <FormControl>
-                <Input autoComplete="off" placeholder="https://example.com" {...field} />
+                <Input className="text-sm" autoComplete="off" placeholder="https://example.com" {...field} />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-sm" />
             </FormItem>
           )}
         />
@@ -119,9 +119,10 @@ export function LinkForm({ onSuccess, editMode = false, linkData }: LinkFormProp
           name="code"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Short Code</FormLabel>
+              <FormLabel className="text-sm">Short Code</FormLabel>
               <FormControl>
                 <Input
+                  className="text-sm"
                   placeholder="mylink"
                   {...field}
                   maxLength={20}
@@ -134,7 +135,7 @@ export function LinkForm({ onSuccess, editMode = false, linkData }: LinkFormProp
                   }}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-sm" />
             </FormItem>
           )}
         />
@@ -145,18 +146,18 @@ export function LinkForm({ onSuccess, editMode = false, linkData }: LinkFormProp
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description (Optional)</FormLabel>
+              <FormLabel className="text-sm">Description (Optional)</FormLabel>
               <FormControl>
                 <Textarea
+                  className="min-h-[100px] max-h-[200px] resize-y text-sm"
                   maxLength={200}
                   autoComplete="off"
                   placeholder="Enter a description for your short link..."
-                  className="min-h-[100px] max-h-[200px] resize-y"
                   rows={4}
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-sm" />
             </FormItem>
           )}
         />
