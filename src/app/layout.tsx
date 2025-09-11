@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { saira as font } from "@/ui/fonts";
+import { sansation as font } from "@/ui/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
