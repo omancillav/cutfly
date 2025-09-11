@@ -25,8 +25,13 @@ import { createLink } from "@/lib/actions";
 
 type LinkFormValues = z.infer<typeof linkFormSchema>;
 
-export function LinkForm() {
+interface LinkFormProps {
+  linksCount: number;
+}
+
+export function LinkForm({ linksCount }: LinkFormProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const hasReachedLimit = linksCount >= 30;
 
   const form = useForm<LinkFormValues>({
     resolver: zodResolver(linkFormSchema),
@@ -37,20 +42,59 @@ export function LinkForm() {
     },
   });
 
-  const onSubmit = (values: LinkFormValues) => {
-    console.log("Form submitted with values:", values);
-    createLink({
-      url: values.url,
-      code: values.code,
-      description: values.description,
-    });
+  const onSubmit = async (values: LinkFormValues) => {
+    // Validación adicional en el frontend
+    if (hasReachedLimit) {
+      toast.error("Link limit reached", {
+        description: "You have reached the maximum of 30 links",
+      });
+      return;
+    }
 
-    toast.success("Link created successfully!", {
-      description: `Short code: ${values.code}`,
-    });
+    try {
+      console.log("Form submitted with values:", values);
 
-    setIsOpen(false);
-    form.reset();
+      const result = await createLink({
+        url: values.url,
+        code: values.code,
+        description: values.description,
+      });
+
+      if (result.success) {
+        toast.success("Link created successfully!", {
+          description: `Short code: ${values.code}`,
+        });
+
+        setIsOpen(false);
+        form.reset();
+
+        window.location.reload();
+      } else {
+        if (result.field === "code") {
+          form.setError("code", {
+            type: "manual",
+            message: result.error,
+          });
+        } else if (result.error.includes("Link limit reached")) {
+          toast.error("Link limit reached", {
+            description: "You have reached the maximum of 30 links",
+          });
+        } else if (result.error.includes("Not authenticated")) {
+          toast.error("Authentication required", {
+            description: "Please log in to create links",
+          });
+        } else {
+          toast.error("Failed to create link", {
+            description: result.error,
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Unexpected error creating link:", error);
+      toast.error("Unexpected error", {
+        description: "Something went wrong. Please try again.",
+      });
+    }
   };
 
   // Handler para errores de validación
@@ -61,12 +105,17 @@ export function LinkForm() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="w-full md:w-fit">
-          <div className="flex items-center gap-2">
-            Create link
-            <Link size={16} />
-          </div>
-        </Button>
+        <div className="w-full md:w-fit">
+          <Button className="w-full md:w-fit" disabled={hasReachedLimit}>
+            <div className="flex items-center gap-2">
+              {hasReachedLimit ? "Link limit reached (30/30)" : "Create link"}
+              <Link size={16} />
+            </div>
+          </Button>
+          {hasReachedLimit && (
+            <p className="text-xs text-muted-foreground mt-1 text-center md:text-left">Maximum of 30 links reached</p>
+          )}
+        </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader className="mb-2">
@@ -99,7 +148,17 @@ export function LinkForm() {
                 <FormItem>
                   <FormLabel>Short Code</FormLabel>
                   <FormControl>
-                    <Input placeholder="mylink" {...field} />
+                    <Input
+                      placeholder="mylink"
+                      {...field}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        // Limpiar error del código cuando el usuario empiece a escribir
+                        if (form.formState.errors.code?.type === "manual") {
+                          form.clearErrors("code");
+                        }
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

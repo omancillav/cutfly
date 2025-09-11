@@ -27,7 +27,7 @@ export default async function Dashboard() {
         </div>
 
         <div className="flex justify-end w-full">
-          <LinkForm />
+          <LinkForm linksCount={linksCount} />
         </div>
       </div>
 

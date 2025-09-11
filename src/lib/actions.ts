@@ -1,6 +1,7 @@
 "use server";
 import { turso } from "./turso-client";
 import { auth } from "./auth-actions";
+import { checkCodeExists, getLinksByUserId } from "./data";
 
 interface LinkData {
   url: string;
@@ -8,22 +9,42 @@ interface LinkData {
   description?: string | null;
 }
 
-export const createLink = async (data: LinkData) => {
-  const session = await auth();
+type CreateLinkResult = { success: true; data: unknown } | { success: false; error: string; field?: string };
 
-  if (!session || !session.user || !session.user.id) {
-    throw new Error("Not authenticated");
+export const createLink = async (data: LinkData): Promise<CreateLinkResult> => {
+  try {
+    const session = await auth();
+
+    if (!session || !session.user || !session.user.id) {
+      return { success: false, error: "Not authenticated" };
+    }
+
+    const userId = Number(session.user.id);
+
+    // Validar límite de 30 links por usuario
+    const userLinks = await getLinksByUserId(userId);
+    if (userLinks.length >= 30) {
+      return { success: false, error: "Link limit reached. Maximum 30 links allowed per user." };
+    }
+
+    // Validar que el código no exista
+    const codeExists = await checkCodeExists(data.code);
+    if (codeExists) {
+      return { success: false, error: "Code already exists. Please choose a different short code.", field: "code" };
+    }
+
+    const res = await turso.execute("INSERT INTO links (user_id, url, code, description) VALUES (?, ?, ?, ?)", [
+      userId,
+      data.url,
+      data.code,
+      data.description ?? null,
+    ]);
+
+    return { success: true, data: res.rows[0] };
+  } catch (error) {
+    console.error("Error creating link:", error);
+    return { success: false, error: "Failed to create link in database" };
   }
-
-  const userId = session.user.id;
-
-  const res = await turso.execute("INSERT INTO links (user_id, url, code, description) VALUES (?, ?, ?, ?)", [
-    userId,
-    data.url,
-    data.code,
-    data.description ?? null,
-  ]);
-  return res.rows[0];
 };
 
 export const deleteLink = async (code: string) => {
