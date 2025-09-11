@@ -29,5 +29,5 @@ export const linkFormSchema = z.object({
     .string()
     .max(200, { message: "Description must be no more than 200 characters" })
     .optional()
-    .or(z.literal("")), // Permite string vacío
+    .or(z.literal("")), 
 });

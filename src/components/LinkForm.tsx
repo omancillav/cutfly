@@ -103,18 +103,35 @@ export function LinkForm({ linksCount }: LinkFormProps) {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog
+      open={isOpen}
+      onOpenChange={(open) => {
+        if (open && hasReachedLimit) {
+          return;
+        }
+        setIsOpen(open);
+      }}
+    >
       <DialogTrigger asChild>
         <div className="w-full md:w-fit">
-          <Button className="w-full md:w-fit" disabled={hasReachedLimit}>
+          <Button
+            className="w-full md:w-fit"
+            disabled={hasReachedLimit}
+            onClick={(e) => {
+              if (hasReachedLimit) {
+                e.preventDefault();
+                e.stopPropagation();
+                toast.error("Link limit reached", {
+                  description: "You have reached the maximum of 30 links",
+                });
+              }
+            }}
+          >
             <div className="flex items-center gap-2">
-              {hasReachedLimit ? "Link limit reached (30/30)" : "Create link"}
+              {hasReachedLimit ? "Link limit reached" : "Create link"}
               <Link size={16} />
             </div>
           </Button>
-          {hasReachedLimit && (
-            <p className="text-xs text-muted-foreground mt-1 text-center md:text-left">Maximum of 30 links reached</p>
-          )}
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -133,7 +150,7 @@ export function LinkForm({ linksCount }: LinkFormProps) {
                 <FormItem>
                   <FormLabel>URL</FormLabel>
                   <FormControl>
-                    <Input placeholder="https://example.com" {...field} />
+                    <Input autoComplete="off" placeholder="https://example.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -151,6 +168,8 @@ export function LinkForm({ linksCount }: LinkFormProps) {
                     <Input
                       placeholder="mylink"
                       {...field}
+                      maxLength={20}
+                      autoComplete="off"
                       onChange={(e) => {
                         field.onChange(e);
                         // Limpiar error del código cuando el usuario empiece a escribir
@@ -174,6 +193,8 @@ export function LinkForm({ linksCount }: LinkFormProps) {
                   <FormLabel>Description (Optional)</FormLabel>
                   <FormControl>
                     <Textarea
+                      maxLength={200}
+                      autoComplete="off"
                       placeholder="Enter a description for your short link..."
                       className="min-h-[100px] max-h-[200px] resize-y"
                       rows={4}
