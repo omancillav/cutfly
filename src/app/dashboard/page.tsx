@@ -36,7 +36,7 @@ export default async function Dashboard() {
           <NoLinks />
         ) : (
           <ul>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 w-full">
               {links.map((link) => {
                 const code = String(link.code);
                 const clicks = Number(link.clicks);
