@@ -25,7 +25,7 @@ let tursoClient: ReturnType<typeof createClient> | null = null;
 export function getTurso() {
   if (!tursoClient) {
     tursoClient = getTursoClient();
-    console.log('Turso database configured successfully');
+    console.log('Turso database connected successfully');
   }
   return tursoClient;
 }

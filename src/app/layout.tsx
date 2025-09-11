@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { inter } from "@/ui/fonts";
+import { sansation as font } from "@/ui/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} font-sans antialiased`}>
+      <body className={`${font.className} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="relative min-h-svh w-full">
             <div className="relative z-10 max-w-[1440px] mx-auto w-full px-3 md:px-6 min-h-svh flex flex-col">
