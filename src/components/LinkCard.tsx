@@ -24,7 +24,7 @@ export function LinkCard({ link }: { link: Link }) {
               {link.clicks} clicks
             </p>
             |
-            <Actions linkCode={link.code} />
+            <Actions linkData={link} />
           </div>
         </div>
       </CardHeader>

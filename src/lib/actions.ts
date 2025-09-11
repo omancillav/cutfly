@@ -47,6 +47,41 @@ export const createLink = async (data: LinkData): Promise<CreateLinkResult> => {
   }
 };
 
+export const updateLink = async (originalCode: string, data: LinkData): Promise<CreateLinkResult> => {
+  try {
+    const session = await auth();
+
+    if (!session || !session.user || !session.user.id) {
+      return { success: false, error: "Not authenticated" };
+    }
+
+    const userId = Number(session.user.id);
+
+    // Si el código cambió, validar que el nuevo código no exista
+    if (originalCode !== data.code) {
+      const codeExists = await checkCodeExists(data.code);
+      if (codeExists) {
+        return { success: false, error: "Code already exists. Please choose a different short code.", field: "code" };
+      }
+    }
+
+    // Actualizar el link
+    const res = await turso.execute(
+      "UPDATE links SET url = ?, code = ?, description = ? WHERE code = ? AND user_id = ?",
+      [data.url, data.code, data.description ?? null, originalCode, userId]
+    );
+
+    if (res.rowsAffected === 0) {
+      return { success: false, error: "Link not found or you don't have permission to edit it" };
+    }
+
+    return { success: true, data: res.rows[0] };
+  } catch (error) {
+    console.error("Error updating link:", error);
+    return { success: false, error: "Failed to update link in database" };
+  }
+};
+
 export const deleteLink = async (code: string) => {
   try {
     const res = await turso.execute("DELETE FROM links WHERE code = ?", [code]);

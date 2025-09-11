@@ -4,13 +4,22 @@ import { Copy, Pen, Trash } from "lucide-react";
 import { deleteLink } from "@/lib/actions";
 import { toast } from "sonner";
 import { ConfirmationDialog } from "./ConfirmationDialog";
+import { LinkFormModal } from "./LinkFormModal";
 
-export function Actions({ linkCode }: { linkCode: string }) {
+interface Link {
+  code: string;
+  url: string;
+  description?: string;
+  clicks: number;
+  created_at: string;
+}
+
+export function Actions({ linkData }: { linkData: Link }) {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
     setIsDeleting(true);
-    toast.promise(deleteLink(linkCode), {
+    toast.promise(deleteLink(linkData.code), {
       loading: "Deleting link...",
       success: () => {
         window.location.reload();
@@ -22,7 +31,7 @@ export function Actions({ linkCode }: { linkCode: string }) {
   };
 
   const handleCopy = () => {
-    const fullLink = `${window.location.origin}/${linkCode}`;
+    const fullLink = `${window.location.origin}/${linkData.code}`;
     navigator.clipboard.writeText(fullLink);
     toast.success(
       <div>
@@ -35,13 +44,17 @@ export function Actions({ linkCode }: { linkCode: string }) {
   return (
     <div className="flex items-center gap-3">
       <Copy onClick={handleCopy} size={16} className="cursor-pointer hover:opacity-80" />
-      <Pen size={16} className="cursor-pointer hover:opacity-80" />
-      <ConfirmationDialog 
+      <LinkFormModal
+        editMode={true}
+        linkData={linkData}
+        buttonIcon={<Pen size={16} />}
+        buttonText=""
+        triggerClassName=""
+      />
+      <ConfirmationDialog
         onConfirm={handleDelete}
         isLoading={isDeleting}
-        trigger={
-          <Trash size={16} className="cursor-pointer hover:opacity-80" />
-        }
+        trigger={<Trash size={16} className="cursor-pointer hover:opacity-80" />}
       />
     </div>
   );

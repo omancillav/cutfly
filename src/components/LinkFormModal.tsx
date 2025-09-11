@@ -15,14 +15,34 @@ import { Link } from "lucide-react";
 import { toast } from "sonner";
 import { LinkForm } from "./LinkForm";
 
-interface LinkFormModalProps {
-  linksCount: number;
+interface Link {
+  code: string;
+  url: string;
+  description?: string;
+  clicks: number;
+  created_at: string;
 }
 
-export function LinkFormModal({ linksCount }: LinkFormModalProps) {
+interface LinkFormModalProps {
+  linksCount?: number;
+  editMode?: boolean;
+  linkData?: Link;
+  buttonText?: string;
+  buttonIcon?: React.ReactNode;
+  triggerClassName?: string;
+}
+
+export function LinkFormModal({
+  linksCount = 0,
+  editMode = false,
+  linkData,
+  buttonText,
+  buttonIcon,
+  triggerClassName = "",
+}: LinkFormModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
-  const hasReachedLimit = linksCount >= 30;
+  const hasReachedLimit = !editMode && linksCount >= 30;
 
   const handleOpenChange = (open: boolean) => {
     if (open && hasReachedLimit) {
@@ -35,8 +55,15 @@ export function LinkFormModal({ linksCount }: LinkFormModalProps) {
     setIsOpen(false);
   };
 
-  const triggerButton = (
-    <div className="w-full md:w-fit">
+  const defaultButtonText = editMode ? "Edit link" : "Create link";
+  const defaultButtonIcon = <Link size={16} />;
+
+  const triggerButton = editMode ? (
+    // Para modo edición, renderizar solo el ícono
+    <div className={`cursor-pointer hover:opacity-80 ${triggerClassName}`}>{buttonIcon || defaultButtonIcon}</div>
+  ) : (
+    // Para modo creación, renderizar el botón completo
+    <div className={`w-full md:w-fit ${triggerClassName}`}>
       <Button
         className="w-full md:w-fit"
         disabled={hasReachedLimit}
@@ -51,8 +78,8 @@ export function LinkFormModal({ linksCount }: LinkFormModalProps) {
         }}
       >
         <div className="flex items-center gap-2">
-          {hasReachedLimit ? "Link limit reached" : "Create link"}
-          <Link size={16} />
+          {hasReachedLimit ? "Link limit reached" : buttonText || defaultButtonText}
+          {buttonIcon || defaultButtonIcon}
         </div>
       </Button>
     </div>
@@ -64,12 +91,14 @@ export function LinkFormModal({ linksCount }: LinkFormModalProps) {
         <DialogTrigger asChild>{triggerButton}</DialogTrigger>
         <DialogContent className="sm:max-w-[450px]">
           <DialogHeader className="mb-2">
-            <DialogTitle>Create a link</DialogTitle>
+            <DialogTitle>{editMode ? "Edit link" : "Create a link"}</DialogTitle>
             <DialogDescription className="hidden">
-              Fill out the form below to create a new short link.
+              {editMode
+                ? "Edit the details of your short link."
+                : "Fill out the form below to create a new short link."}
             </DialogDescription>
           </DialogHeader>
-          <LinkForm onSuccess={handleSuccess} />
+          <LinkForm onSuccess={handleSuccess} editMode={editMode} linkData={linkData} />
         </DialogContent>
       </Dialog>
     );
@@ -80,11 +109,13 @@ export function LinkFormModal({ linksCount }: LinkFormModalProps) {
       <SheetTrigger asChild>{triggerButton}</SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Create a link</SheetTitle>
-          <SheetDescription className="hidden">Fill out the form below to create a new short link.</SheetDescription>
+          <SheetTitle>{editMode ? "Edit link" : "Create a link"}</SheetTitle>
+          <SheetDescription className="hidden">
+            {editMode ? "Edit the details of your short link." : "Fill out the form below to create a new short link."}
+          </SheetDescription>
         </SheetHeader>
         <div className="px-4">
-          <LinkForm onSuccess={handleSuccess} />
+          <LinkForm onSuccess={handleSuccess} editMode={editMode} linkData={linkData} />
         </div>
       </SheetContent>
     </Sheet>
