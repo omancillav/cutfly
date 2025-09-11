@@ -1,22 +1,27 @@
 "use server";
-
 import { turso } from "./turso-client";
+import { auth } from "./auth-actions";
 
 interface LinkData {
   url: string;
-  userId: string;
   code: string;
-  description: string;
-  title: string;
+  description?: string | null;
 }
 
 export const createLink = async (data: LinkData) => {
-  const res = await turso.execute("INSERT INTO links (user_id, url, code, description, title) VALUES (?, ?, ?, ?, ?)", [
-    data.userId,
+  const session = await auth();
+
+  if (!session || !session.user || !session.user.id) {
+    throw new Error("Not authenticated");
+  }
+
+  const userId = session.user.id;
+
+  const res = await turso.execute("INSERT INTO links (user_id, url, code, description) VALUES (?, ?, ?, ?)", [
+    userId,
     data.url,
     data.code,
-    data.description,
-    data.title,
+    data.description ?? null,
   ]);
   return res.rows[0];
 };
