@@ -3,11 +3,13 @@ import { redirect } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { User, Mail } from "lucide-react";
+import { User, Mail, LayoutDashboard } from "lucide-react";
 import Image from "next/image";
 import { ProfileForm } from "@/components/ProfileForm";
 import { ExportLinksButton } from "@/components/ExportLinksButton";
 import { DeleteAccountButton } from "@/components/DeleteAccountButton";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default async function ProfilePage() {
   const session = await auth();
@@ -20,23 +22,30 @@ export default async function ProfilePage() {
 
   return (
     <div className="py-4 w-full flex flex-col max-w-2xl mx-auto">
-      <div className="flex flex-col gap-6">
-        {/* Profile Header */}
-        <Card>
-          <CardHeader className="text-center">
-            <div className="flex justify-center mb-4">
-              <Image
-                src={`https://api.dicebear.com/9.x/glass/webp?seed=${encodeURIComponent(email || name || "default")}`}
-                alt="Profile"
-                width={80}
-                height={80}
-                className="w-20 h-20 rounded-full"
-              />
-            </div>
-            <CardTitle className="text-2xl">My Profile</CardTitle>
-          </CardHeader>
-        </Card>
-
+      <div className="flex flex-col gap-6 w-full">
+        <div className="flex flex-col gap-3">
+          <Link href="/dashboard">
+            <Button className="w-full !bg-card" variant="outline">
+              <LayoutDashboard className="w-4 h-4" />
+              Dashboard
+            </Button>
+          </Link>
+          {/* Profile Header */}
+          <Card>
+            <CardHeader className="text-center">
+              <div className="flex justify-center mb-4">
+                <Image
+                  src={`https://api.dicebear.com/9.x/glass/webp?seed=${encodeURIComponent(email || name || "default")}`}
+                  alt="Profile"
+                  width={80}
+                  height={80}
+                  className="w-20 h-20 rounded-full"
+                />
+              </div>
+              <CardTitle className="text-2xl">My Profile</CardTitle>
+            </CardHeader>
+          </Card>
+        </div>
         {/* Profile Information */}
         <Card>
           <CardHeader>

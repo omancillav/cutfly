@@ -22,7 +22,6 @@ export function DeleteAccountButton() {
           description: "Your account and all your links have been permanently deleted.",
         });
 
-        // Small delay to ensure the toast is shown before redirect
         setTimeout(async () => {
           await signOut();
         }, 1000);
@@ -39,7 +38,6 @@ export function DeleteAccountButton() {
       });
       setIsDeleting(false);
     }
-    // Removed finally block to avoid setting state after successful deletion
   };
 
   return (

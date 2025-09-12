@@ -163,7 +163,6 @@ export const exportUserLinks = async () => {
   }
 };
 
-// Server action para actualizar el nombre del usuario
 export const updateUserNameAction = async (newName: string): Promise<{ success: boolean; error?: string }> => {
   try {
     const session = await auth();
@@ -172,7 +171,6 @@ export const updateUserNameAction = async (newName: string): Promise<{ success: 
       return { success: false, error: "Not authenticated" };
     }
 
-    // Obtener el github_id desde la base de datos usando el user_id
     const result = await turso.execute(`SELECT github_id FROM users WHERE id = ?`, [session.user.id]);
 
     if (result.rows.length === 0) {
@@ -193,7 +191,6 @@ export const updateUserNameAction = async (newName: string): Promise<{ success: 
   }
 };
 
-// Server action para eliminar la cuenta del usuario
 export const deleteUserAccountAction = async (): Promise<{ success: boolean; error?: string }> => {
   try {
     const session = await auth();
@@ -202,7 +199,6 @@ export const deleteUserAccountAction = async (): Promise<{ success: boolean; err
       return { success: false, error: "Not authenticated" };
     }
 
-    // Obtener el github_id desde la base de datos usando el user_id
     const result = await turso.execute(`SELECT github_id FROM users WHERE id = ?`, [session.user.id]);
 
     if (result.rows.length === 0) {
