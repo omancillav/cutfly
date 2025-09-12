@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { LogOut } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 import { GitHubIcon } from "@/assets/github-icon";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { auth, signOut } from "@/lib/auth-actions";
@@ -9,6 +9,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ArrowRight } from "lucide-react";
@@ -64,6 +65,15 @@ export async function Header() {
                 {session.user.name}
                 <span className="text-xs text-muted-foreground">{session.user.email}</span>
               </div>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link href="/profile" className="w-full">
+                  <div className="flex items-center gap-10 justify-between w-full py-1.5 text-sm">
+                    My Profile
+                    <User className="h-4 w-4" />
+                  </div>
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <form
                   action={async () => {

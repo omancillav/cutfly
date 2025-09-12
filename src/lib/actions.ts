@@ -1,6 +1,7 @@
 "use server";
 import { turso } from "./turso-client";
 import { auth } from "./auth-actions";
+import { updateUserName, deleteUserAccount } from "./db-auth";
 import { checkCodeExists, getLinksByUserId, isProtectedRoute } from "./data";
 
 interface LinkData {
@@ -114,5 +115,106 @@ export const incrementClicks = async (code: string) => {
   } catch (error) {
     console.error("Error in incrementClicks:", error);
     throw new Error("Failed to increment link clicks");
+  }
+};
+
+export const exportUserLinks = async () => {
+  try {
+    const session = await auth();
+
+    if (!session || !session.user || !session.user.id) {
+      return { success: false, error: "Not authenticated" };
+    }
+
+    const userId = Number(session.user.id);
+
+    // Get all user links
+    const userLinks = await getLinksByUserId(userId);
+
+    // Format the data for export
+    const exportData = {
+      user: {
+        name: session.user.name,
+        email: session.user.email,
+        exportDate: new Date().toISOString(),
+      },
+      links: userLinks.map((link) => ({
+        url: String(link.url),
+        code: String(link.code),
+        description: link.description ? String(link.description) : null,
+        clicks: Number(link.clicks),
+        createdAt: String(link.created_at),
+        shortUrl: `${
+          process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL
+            ? `https://${process.env.VERCEL_URL}`
+            : "http://localhost:3000"
+        }/${link.code}`,
+      })),
+      summary: {
+        totalLinks: userLinks.length,
+        totalClicks: userLinks.reduce((sum, link) => sum + Number(link.clicks), 0),
+      },
+    };
+
+    return { success: true, data: exportData };
+  } catch (error) {
+    console.error("Error exporting user links:", error);
+    return { success: false, error: "Failed to export links" };
+  }
+};
+
+export const updateUserNameAction = async (newName: string): Promise<{ success: boolean; error?: string }> => {
+  try {
+    const session = await auth();
+
+    if (!session || !session.user || !session.user.id) {
+      return { success: false, error: "Not authenticated" };
+    }
+
+    const result = await turso.execute(`SELECT github_id FROM users WHERE id = ?`, [session.user.id]);
+
+    if (result.rows.length === 0) {
+      return { success: false, error: "User not found" };
+    }
+
+    const githubId = String(result.rows[0].github_id);
+    const updateResult = await updateUserName(githubId, newName.trim());
+
+    if (updateResult) {
+      return { success: true };
+    } else {
+      return { success: false, error: "Failed to update name" };
+    }
+  } catch (error) {
+    console.error("Error updating user name:", error);
+    return { success: false, error: "Failed to update name" };
+  }
+};
+
+export const deleteUserAccountAction = async (): Promise<{ success: boolean; error?: string }> => {
+  try {
+    const session = await auth();
+
+    if (!session || !session.user || !session.user.id) {
+      return { success: false, error: "Not authenticated" };
+    }
+
+    const result = await turso.execute(`SELECT github_id FROM users WHERE id = ?`, [session.user.id]);
+
+    if (result.rows.length === 0) {
+      return { success: false, error: "User not found" };
+    }
+
+    const githubId = String(result.rows[0].github_id);
+    const deleteResult = await deleteUserAccount(githubId);
+
+    if (deleteResult) {
+      return { success: true };
+    } else {
+      return { success: false, error: "Failed to delete account" };
+    }
+  } catch (error) {
+    console.error("Error deleting user account:", error);
+    return { success: false, error: "Failed to delete account" };
   }
 };
