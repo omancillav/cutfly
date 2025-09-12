@@ -1,7 +1,7 @@
 "use server";
 import { turso } from "./turso-client";
 import { auth } from "./auth-actions";
-import { checkCodeExists, getLinksByUserId } from "./data";
+import { checkCodeExists, getLinksByUserId, isProtectedRoute } from "./data";
 
 interface LinkData {
   url: string;
@@ -25,6 +25,11 @@ export const createLink = async (data: LinkData): Promise<CreateLinkResult> => {
     const userLinks = await getLinksByUserId(userId);
     if (userLinks.length >= 30) {
       return { success: false, error: "Link limit reached. Maximum 30 links allowed per user." };
+    }
+
+    // Validar que el código no sea una ruta protegida
+    if (isProtectedRoute(data.code)) {
+      return { success: false, error: "Code already exists. Please choose a different short code.", field: "code" };
     }
 
     // Validar que el código no exista
@@ -59,6 +64,11 @@ export const updateLink = async (originalCode: string, data: LinkData): Promise<
 
     // Si el código cambió, validar que el nuevo código no exista
     if (originalCode !== data.code) {
+      // Validar que el código no sea una ruta protegida
+      if (isProtectedRoute(data.code)) {
+        return { success: false, error: "Code already exists. Please choose a different short code.", field: "code" };
+      }
+
       const codeExists = await checkCodeExists(data.code);
       if (codeExists) {
         return { success: false, error: "Code already exists. Please choose a different short code.", field: "code" };
