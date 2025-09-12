@@ -24,13 +24,13 @@ export default async function ProfilePage() {
     <div className="py-4 w-full flex flex-col max-w-2xl mx-auto">
       <div className="flex flex-col gap-3 w-full">
         <Link href="/dashboard">
-          <Button className="w-full !bg-card" variant="outline">
+          <Button className="w-full" variant="outline">
             <LayoutDashboard className="w-4 h-4" />
-            Dashboard
+            Go to Dashboard
           </Button>
         </Link>
         {/* Profile Header */}
-        <Card>
+        <Card className="bg-background shadow-none">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
               <Image
@@ -45,7 +45,7 @@ export default async function ProfilePage() {
           </CardHeader>
         </Card>
         {/* Profile Information */}
-        <Card>
+        <Card className="bg-background shadow-none">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <User className="w-5 h-5" />
@@ -81,7 +81,7 @@ export default async function ProfilePage() {
         </Card>
 
         {/* Account Actions */}
-        <Card>
+        <Card className="bg-background shadow-none">
           <CardHeader>
             <CardTitle>Account Actions</CardTitle>
           </CardHeader>
