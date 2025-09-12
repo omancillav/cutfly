@@ -163,7 +163,9 @@
   * {
     @apply border-border outline-ring/50;
   }
-  html,
+  html {
+    scrollbar-width: thin;
+  }
   body {
     @apply bg-background text-foreground;
     margin: 0;
