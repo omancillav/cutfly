@@ -21,7 +21,7 @@ export function LinkCard({ link }: { link: LinkData }) {
 
   return (
     <Card
-      className={`gap-2 bg-card/60 shadow-none transition-all duration-300 ease-in-out ${isExpanded ? "pb-4" : "pb-2"}`}
+      className={`gap-2 shadow-none transition-all duration-300 ease-in-out ${isExpanded ? "pb-4" : "pb-2"}`}
     >
       <CardHeader>
         <div className="flex justify-between items-center">
