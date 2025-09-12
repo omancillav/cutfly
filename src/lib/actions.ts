@@ -1,6 +1,7 @@
 "use server";
 import { turso } from "./turso-client";
 import { auth } from "./auth-actions";
+import { updateUserName, deleteUserAccount } from "./db-auth";
 import { checkCodeExists, getLinksByUserId, isProtectedRoute } from "./data";
 
 interface LinkData {
@@ -159,5 +160,65 @@ export const exportUserLinks = async () => {
   } catch (error) {
     console.error("Error exporting user links:", error);
     return { success: false, error: "Failed to export links" };
+  }
+};
+
+// Server action para actualizar el nombre del usuario
+export const updateUserNameAction = async (newName: string): Promise<{ success: boolean; error?: string }> => {
+  try {
+    const session = await auth();
+
+    if (!session || !session.user || !session.user.id) {
+      return { success: false, error: "Not authenticated" };
+    }
+
+    // Obtener el github_id desde la base de datos usando el user_id
+    const result = await turso.execute(`SELECT github_id FROM users WHERE id = ?`, [session.user.id]);
+
+    if (result.rows.length === 0) {
+      return { success: false, error: "User not found" };
+    }
+
+    const githubId = String(result.rows[0].github_id);
+    const updateResult = await updateUserName(githubId, newName.trim());
+
+    if (updateResult) {
+      return { success: true };
+    } else {
+      return { success: false, error: "Failed to update name" };
+    }
+  } catch (error) {
+    console.error("Error updating user name:", error);
+    return { success: false, error: "Failed to update name" };
+  }
+};
+
+// Server action para eliminar la cuenta del usuario
+export const deleteUserAccountAction = async (): Promise<{ success: boolean; error?: string }> => {
+  try {
+    const session = await auth();
+
+    if (!session || !session.user || !session.user.id) {
+      return { success: false, error: "Not authenticated" };
+    }
+
+    // Obtener el github_id desde la base de datos usando el user_id
+    const result = await turso.execute(`SELECT github_id FROM users WHERE id = ?`, [session.user.id]);
+
+    if (result.rows.length === 0) {
+      return { success: false, error: "User not found" };
+    }
+
+    const githubId = String(result.rows[0].github_id);
+    const deleteResult = await deleteUserAccount(githubId);
+
+    if (deleteResult) {
+      return { success: true };
+    } else {
+      return { success: false, error: "Failed to delete account" };
+    }
+  } catch (error) {
+    console.error("Error deleting user account:", error);
+    return { success: false, error: "Failed to delete account" };
   }
 };

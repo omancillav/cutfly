@@ -9,6 +9,8 @@ import { Label } from "@/components/ui/label";
 import { Edit3, Save, X } from "lucide-react";
 import { toast } from "sonner";
 import { profileUpdateSchema, type ProfileUpdateData } from "@/schemas/ProfileSchema";
+import { updateUserNameAction } from "@/lib/actions";
+import { useRouter } from "next/navigation";
 
 interface ProfileFormProps {
   initialName: string;
@@ -17,12 +19,14 @@ interface ProfileFormProps {
 export function ProfileForm({ initialName }: ProfileFormProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    getValues,
   } = useForm<ProfileUpdateData>({
     resolver: zodResolver(profileUpdateSchema),
     defaultValues: {
@@ -43,17 +47,25 @@ export function ProfileForm({ initialName }: ProfileFormProps) {
     setIsSubmitting(true);
 
     try {
-      // TODO: Implement API call to update user name
-      // const response = await updateUserProfile(userId, data);
+      const newName = getValues("name");
+      const result = await updateUserNameAction(newName);
 
-      // Simulate API call for now
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      toast.success("Profile updated", {
-        description: "Your name has been updated successfully",
-      });
-
-      setIsEditing(false);
+      if (result.success) {
+        toast.success("Profile updated", {
+          description: "Your name has been updated successfully",
+        });
+        setIsEditing(false);
+        // Refresh the page to show the updated name and session
+        router.refresh();
+        // Force a complete page reload to ensure session is updated
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+      } else {
+        toast.error("Update error", {
+          description: result.error || "There was a problem updating your profile. Please try again.",
+        });
+      }
     } catch (error) {
       console.error("Error updating profile:", error);
       toast.error("Update error", {

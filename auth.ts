@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
-import { createOrVerifyUser, getUserIdByGithubId } from "@/lib/auth-actions";
+import { createOrVerifyUser, getUserIdByGithubId, getUserByGithubId } from "@/lib/db-auth";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -34,8 +34,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      if (token?.uid) {
+      if (token?.uid && token?.github_id) {
         session.user.id = String(token.uid);
+
+        // Obtener información actualizada del usuario desde la base de datos
+        const userData = await getUserByGithubId(String(token.github_id));
+        if (userData) {
+          session.user.name = String(userData.name);
+          session.user.email = String(userData.email);
+        }
       }
       return session;
     },

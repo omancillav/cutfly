@@ -1,13 +1,13 @@
 import { auth } from "@/lib/auth-actions";
 import { redirect } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { User, Mail, Trash2 } from "lucide-react";
+import { User, Mail } from "lucide-react";
 import Image from "next/image";
 import { ProfileForm } from "@/components/ProfileForm";
 import { ExportLinksButton } from "@/components/ExportLinksButton";
+import { DeleteAccountButton } from "@/components/DeleteAccountButton";
 
 export default async function ProfilePage() {
   const session = await auth();
@@ -84,10 +84,7 @@ export default async function ProfilePage() {
               <ExportLinksButton />
 
               {/* Delete Account Button */}
-              <Button variant="destructive" className="flex-1" title="Permanently delete account">
-                <Trash2 className="w-4 h-4" />
-                Delete Account
-              </Button>
+              <DeleteAccountButton />
             </div>
 
             <div className="text-xs text-muted-foreground space-y-1">
