@@ -116,3 +116,48 @@ export const incrementClicks = async (code: string) => {
     throw new Error("Failed to increment link clicks");
   }
 };
+
+export const exportUserLinks = async () => {
+  try {
+    const session = await auth();
+
+    if (!session || !session.user || !session.user.id) {
+      return { success: false, error: "Not authenticated" };
+    }
+
+    const userId = Number(session.user.id);
+
+    // Get all user links
+    const userLinks = await getLinksByUserId(userId);
+
+    // Format the data for export
+    const exportData = {
+      user: {
+        name: session.user.name,
+        email: session.user.email,
+        exportDate: new Date().toISOString(),
+      },
+      links: userLinks.map((link) => ({
+        url: String(link.url),
+        code: String(link.code),
+        description: link.description ? String(link.description) : null,
+        clicks: Number(link.clicks),
+        createdAt: String(link.created_at),
+        shortUrl: `${
+          process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL
+            ? `https://${process.env.VERCEL_URL}`
+            : "http://localhost:3000"
+        }/${link.code}`,
+      })),
+      summary: {
+        totalLinks: userLinks.length,
+        totalClicks: userLinks.reduce((sum, link) => sum + Number(link.clicks), 0),
+      },
+    };
+
+    return { success: true, data: exportData };
+  } catch (error) {
+    console.error("Error exporting user links:", error);
+    return { success: false, error: "Failed to export links" };
+  }
+};

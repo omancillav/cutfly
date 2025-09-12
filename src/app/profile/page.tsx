@@ -4,9 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { User, Mail, Download, Trash2 } from "lucide-react";
+import { User, Mail, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { ProfileForm } from "@/components/ProfileForm";
+import { ExportLinksButton } from "@/components/ExportLinksButton";
 
 export default async function ProfilePage() {
   const session = await auth();
@@ -25,9 +26,7 @@ export default async function ProfilePage() {
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
               <Image
-                src={`https://api.dicebear.com/9.x/glass/webp?seed=${encodeURIComponent(
-                  email || name || "default"
-                )}`}
+                src={`https://api.dicebear.com/9.x/glass/webp?seed=${encodeURIComponent(email || name || "default")}`}
                 alt="Profile"
                 width={80}
                 height={80}
@@ -69,9 +68,7 @@ export default async function ProfilePage() {
                   />
                 </div>
               </div>
-              <p className="text-xs text-muted-foreground">
-                Your email is connected to GitHub and cannot be changed
-              </p>
+              <p className="text-xs text-muted-foreground">Your email is connected to GitHub and cannot be changed</p>
             </div>
           </CardContent>
         </Card>
@@ -84,29 +81,22 @@ export default async function ProfilePage() {
           <CardContent className="space-y-4">
             {/* Export Links Button */}
             <div className="flex flex-col sm:flex-row gap-3">
-              <Button 
-                variant="outline" 
-                className="flex-1"
-                title="Exportar todos tus enlaces"
-              >
-                <Download className="w-4 h-4" />
-                Export Links
-              </Button>
-              
+              <ExportLinksButton />
+
               {/* Delete Account Button */}
-              <Button 
-                variant="destructive" 
-                className="flex-1"
-                title="Permanently delete account"
-              >
+              <Button variant="destructive" className="flex-1" title="Permanently delete account">
                 <Trash2 className="w-4 h-4" />
                 Delete Account
               </Button>
             </div>
-            
+
             <div className="text-xs text-muted-foreground space-y-1">
-              <p>• <strong>Export Links:</strong> Download all your links in JSON format</p>
-              <p>• <strong>Delete Account:</strong> This will permanently remove your account and all your links</p>
+              <p>
+                • <strong>Export Links:</strong> Download all your links in JSON format
+              </p>
+              <p>
+                • <strong>Delete Account:</strong> This will permanently remove your account and all your links
+              </p>
             </div>
           </CardContent>
         </Card>

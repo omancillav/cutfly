@@ -41,18 +41,18 @@ export function ProfileForm({ initialName }: ProfileFormProps) {
 
   const onSubmit = async () => {
     setIsSubmitting(true);
-    
+
     try {
       // TODO: Implement API call to update user name
       // const response = await updateUserProfile(userId, data);
-      
+
       // Simulate API call for now
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       toast.success("Profile updated", {
         description: "Your name has been updated successfully",
       });
-      
+
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -102,18 +102,10 @@ export function ProfileForm({ initialName }: ProfileFormProps) {
             {...register("name")}
             className={errors.name ? "border-destructive" : ""}
           />
-          {errors.name && (
-            <p className="text-xs text-destructive mt-1">{errors.name.message}</p>
-          )}
+          {errors.name && <p className="text-xs text-destructive mt-1">{errors.name.message}</p>}
         </div>
         <div className="flex gap-1">
-          <Button
-            type="submit"
-            size="icon"
-            variant="default"
-            disabled={isSubmitting}
-            title="Guardar cambios"
-          >
+          <Button type="submit" size="icon" variant="default" disabled={isSubmitting} title="Guardar cambios">
             <Save className="w-4 h-4" />
           </Button>
           <Button
