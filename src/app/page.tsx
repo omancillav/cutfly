@@ -17,8 +17,8 @@ export default function Home() {
       <div className="relative z-10 w-full flex flex-col items-center justify-center gap-6 md:gap-8 px-2 md:mt-0 -mt-6 min-h-[calc(100vh-200px)]">
         <h2 className="text-5xl md:text-6xl font-bold text-center">Fly shorter, Reach further</h2>
         <p className="text-center max-w-4xl text-[15px] md:text-lg">
-          An open-source URL shortener designed for the modern web — fast link creation, detailed analytics, and
-          flexible, customizable features that adapt to individual and team needs.
+          Short links, smart insights. Open-source URL shortener designed for developers who demand control, built with
+          modern web technologies and scalable architecture.
         </p>
         <div className="flex items-center gap-4">
           <Link href="/dashboard">
