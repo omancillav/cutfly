@@ -16,10 +16,16 @@ export const getLinkByCode = async (code: string) => {
   const query = "SELECT * FROM links WHERE code = ?";
   const res = await turso.execute(query, [code]);
   return res.rows[0];
-}
+};
 
 export const checkCodeExists = async (code: string): Promise<boolean> => {
   const query = "SELECT 1 FROM links WHERE code = ? LIMIT 1";
   const res = await turso.execute(query, [code]);
   return res.rows.length > 0;
-}
+};
+
+const PROTECTED_ROUTES = ["dashboard", "login", "api"];
+
+export const isProtectedRoute = (code: string): boolean => {
+  return PROTECTED_ROUTES.includes(code.toLowerCase());
+};
