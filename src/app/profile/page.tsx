@@ -18,19 +18,19 @@ export default async function ProfilePage() {
     redirect("/login");
   }
 
-  const { name, email } = session.user;
+  const { name, email, username } = session.user;
 
   return (
     <div className="py-4 w-full flex flex-col max-w-2xl mx-auto">
       <div className="flex flex-col gap-3 w-full">
         <Link href="/dashboard">
-          <Button className="w-full" variant="outline">
+          <Button className="w-full !bg-card/60" variant="outline">
             <LayoutDashboard className="w-4 h-4" />
             Go to Dashboard
           </Button>
         </Link>
         {/* Profile Header */}
-        <Card className="bg-background shadow-none">
+        <Card>
           <CardHeader className="text-center">
             <div className="flex justify-center mb-4">
               <Image
@@ -41,11 +41,14 @@ export default async function ProfilePage() {
                 className="w-20 h-20 rounded-full"
               />
             </div>
-            <CardTitle className="text-2xl">My Profile</CardTitle>
+            <div className="flex flex-col items-center text-center">
+              <span className="text-muted-foreground">My Profile</span>
+              <CardTitle className="text-2xl">{username}</CardTitle>
+            </div>
           </CardHeader>
         </Card>
         {/* Profile Information */}
-        <Card className="bg-background shadow-none">
+        <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <User className="w-5 h-5" />
@@ -81,7 +84,7 @@ export default async function ProfilePage() {
         </Card>
 
         {/* Account Actions */}
-        <Card className="bg-background shadow-none">
+        <Card>
           <CardHeader>
             <CardTitle>Account Actions</CardTitle>
           </CardHeader>
