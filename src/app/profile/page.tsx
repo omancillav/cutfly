@@ -94,7 +94,7 @@ export default async function ProfilePage() {
               <ExportLinksButton />
 
               {/* Delete Account Button */}
-              <DeleteAccountButton />
+              <DeleteAccountButton userEmail={email || ""} />
             </div>
 
             <div className="text-xs text-muted-foreground space-y-1">

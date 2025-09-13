@@ -54,6 +54,13 @@ export function Actions({ linkData }: { linkData: Link }) {
       <ConfirmationDialog
         onConfirm={handleDelete}
         isLoading={isDeleting}
+        title="Delete Link"
+        description={`This will permanently delete the link "${linkData.code}" and all its data. This action cannot be undone.`}
+        requireConfirmation={{
+          text: linkData.code,
+          placeholder: "Type the link code to confirm",
+          confirmationText: `To confirm deletion, type "${linkData.code}" in the box below:`
+        }}
         trigger={<Trash size={16} className="cursor-pointer hover:opacity-80" />}
       />
     </div>

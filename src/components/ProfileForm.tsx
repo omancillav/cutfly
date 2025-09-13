@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Edit3, Save, X } from "lucide-react";
+import { Edit3, Save, X, User } from "lucide-react";
 import { toast } from "sonner";
 import { profileUpdateSchema, type ProfileUpdateData } from "@/schemas/ProfileSchema";
 import { updateUserNameAction } from "@/lib/actions";
@@ -83,15 +83,18 @@ export function ProfileForm({ initialName }: ProfileFormProps) {
           Name
         </Label>
         <div className="flex gap-2">
-          <Input
-            id="name"
-            name="name"
-            type="text"
-            value={initialName}
-            className="flex-1 bg-muted/50"
-            disabled
-            readOnly
-          />
+          <div className="flex-1 relative">
+            <User className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+            <Input
+              id="name"
+              name="name"
+              type="text"
+              value={initialName}
+              className="pl-10 bg-muted/50"
+              disabled
+              readOnly
+            />
+          </div>
           <Button size="icon" variant="outline" onClick={handleEdit} title="Edit name">
             <Edit3 className="w-4 h-4" />
           </Button>
@@ -106,13 +109,14 @@ export function ProfileForm({ initialName }: ProfileFormProps) {
         Name
       </Label>
       <div className="flex gap-2">
-        <div className="flex-1">
+        <div className="flex-1 relative">
+          <User className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
           <Input
             id="name-edit"
             type="text"
             placeholder="Your name"
             {...register("name")}
-            className={errors.name ? "border-destructive" : ""}
+            className={errors.name ? "pl-10 border-destructive" : "pl-10"}
           />
           {errors.name && <p className="text-xs text-destructive mt-1">{errors.name.message}</p>}
         </div>
