@@ -1,6 +1,23 @@
-import NextAuth from "next-auth";
+import NextAuth, { DefaultSession } from "next-auth";
 import GitHub from "next-auth/providers/github";
 import { createOrVerifyUser, getUserIdByGithubId, getUserByGithubId } from "@/lib/db-auth";
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      username?: string;
+    } & DefaultSession["user"];
+  }
+
+  interface User {
+    id?: string;
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+    username?: string;
+  }
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -42,6 +59,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (userData) {
           session.user.name = String(userData.name);
           session.user.email = String(userData.email);
+          session.user.username = String(userData.username);
         }
       }
       return session;
