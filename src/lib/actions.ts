@@ -145,7 +145,7 @@ export const exportUserLinks = async () => {
         clicks: Number(link.clicks),
         createdAt: String(link.created_at),
         shortUrl: `${
-          process.env.NEXT_PUBLIC_BASE_URL ? `https://${process.env.NEXT_PUBLIC_BASE_URL}` : "http://localhost:3000"
+          process.env.NEXT_PUBLIC_BASE_URL ? `${process.env.NEXT_PUBLIC_BASE_URL}` : "http://localhost:3000"
         }/${link.code}`,
       })),
       summary: {
