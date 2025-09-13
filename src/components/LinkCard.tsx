@@ -20,11 +20,7 @@ export function LinkCard({ link }: { link: LinkData }) {
   const hasDescription = Boolean(link.description?.trim());
 
   return (
-    <Card
-      className={`gap-2 transition-all duration-300 ease-in-out ${
-        isExpanded ? "pb-4" : "pb-2"
-      }`}
-    >
+    <Card className={`gap-2 transition-all duration-300 ease-in-out ${isExpanded ? "pb-4" : "pb-2"}`}>
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle>/{link.code}</CardTitle>

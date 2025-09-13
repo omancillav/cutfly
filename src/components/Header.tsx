@@ -68,9 +68,9 @@ export async function Header() {
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
                 <Link href="/profile" className="w-full">
-                  <div className="flex items-center gap-10 justify-between w-full py-1.5 text-sm">
-                    My Profile
+                  <div className="flex items-center gap-2 w-full text-sm py-1">
                     <User className="h-4 w-4" />
+                    My Profile
                   </div>
                 </Link>
               </DropdownMenuItem>
@@ -82,9 +82,9 @@ export async function Header() {
                   }}
                 >
                   <Button type="submit" variant="ghost" className="w-full p-0">
-                    <div className="flex items-center gap-10 justify-between w-full py-1.5   text-sm">
-                      Sign out
+                    <div className="flex items-center gap-2 w-full text-sm py-1">
                       <LogOut className="h-4 w-4" />
+                      Sign out
                     </div>
                   </Button>
                 </form>
