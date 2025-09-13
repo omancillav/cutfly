@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { deleteUserAccountAction } from "@/lib/actions";
 import { signOut } from "@/lib/auth-actions";
 
-export function DeleteAccountButton() {
+export function DeleteAccountButton({ userEmail }: { userEmail: string }) {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDeleteAccount = async () => {
@@ -45,7 +45,12 @@ export function DeleteAccountButton() {
       onConfirm={handleDeleteAccount}
       isLoading={isDeleting}
       title="Delete Account"
-      description="Are you sure you want to delete your account? This will permanently remove your account and all your links. This action cannot be undone."
+      description="This will permanently delete your account and all your links. This action cannot be undone."
+      requireConfirmation={{
+        text: userEmail,
+        placeholder: "Type your email to confirm",
+        confirmationText: `To confirm deletion, type "${userEmail}" in the box below:`,
+      }}
       trigger={
         <Button variant="destructive" className="flex-1" disabled={isDeleting} title="Permanently delete account">
           <Trash2 className="w-4 h-4" />
