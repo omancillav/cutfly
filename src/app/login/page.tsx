@@ -1,10 +1,9 @@
 import { Card, CardContent, CardTitle, CardHeader, CardDescription } from "@/components/ui/card";
 import { GitHubIcon } from "@/assets/github-icon";
-import Image from "next/image";
 import { signIn, auth } from "@/lib/auth-actions";
 import { redirect } from "next/navigation";
-import { Meteors } from "@/components/magicui/meteors";
 import { RainbowButton } from "@/components/magicui/rainbow-button";
+import Image from "next/image";
 
 export default async function AuthPanel() {
   const session = await auth();
@@ -15,7 +14,6 @@ export default async function AuthPanel() {
 
   return (
     <main className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)]">
-      <Meteors number={50} minDuration={8} maxDuration={20} minDelay={0.5} maxDelay={2} />
       <Card className="min-w-[300px] md:min-w-[400px] text-center z-20">
         <CardHeader className="flex flex-col items-center justify-center gap-3">
           <Image
