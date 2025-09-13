@@ -1,11 +1,13 @@
 import { Link } from "lucide-react";
+import { Meteors } from "./magicui/meteors";
 
 export function NoLinks() {
   return (
-    <div className="flex flex-col items-center justify-center p-6 border border-dashed rounded-lg">
-      <Link className="mx-auto mb-3 h-12 w-12 text-muted-foreground" />
-      <h2 className="text-xl font-bold mb-2 text-center">No Links Found</h2>
-      <p className="text-muted-foreground text-sm mb-5 text-center">
+    <div className="relative flex flex-col items-center justify-center p-6 border border-dashed rounded-lg overflow-hidden min-h-[200px]">
+      <Meteors minDuration={5} maxDuration={15} number={25} />
+      <Link className="mx-auto mb-3 h-12 w-12 text-muted-foreground relative z-10" />
+      <h2 className="text-xl font-bold mb-2 text-center relative z-10">No Links Found</h2>
+      <p className="text-muted-foreground text-sm text-center relative z-10">
         You have not created any links yet. Click the button below to create your first link.
       </p>
     </div>
