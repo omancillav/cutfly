@@ -169,14 +169,7 @@ export const updateUserNameAction = async (newName: string): Promise<{ success: 
       return { success: false, error: "Not authenticated" };
     }
 
-    const result = await turso.execute(`SELECT github_id FROM users WHERE id = ?`, [session.user.id]);
-
-    if (result.rows.length === 0) {
-      return { success: false, error: "User not found" };
-    }
-
-    const githubId = String(result.rows[0].github_id);
-    const updateResult = await updateUserName(githubId, newName.trim());
+    const updateResult = await updateUserName(session.user.id, newName.trim());
 
     if (updateResult) {
       return { success: true };
@@ -197,14 +190,7 @@ export const deleteUserAccountAction = async (): Promise<{ success: boolean; err
       return { success: false, error: "Not authenticated" };
     }
 
-    const result = await turso.execute(`SELECT github_id FROM users WHERE id = ?`, [session.user.id]);
-
-    if (result.rows.length === 0) {
-      return { success: false, error: "User not found" };
-    }
-
-    const githubId = String(result.rows[0].github_id);
-    const deleteResult = await deleteUserAccount(githubId);
+    const deleteResult = await deleteUserAccount(session.user.id);
 
     if (deleteResult) {
       return { success: true };
