@@ -95,7 +95,7 @@ export async function Header() {
         ) : (
           <Link href="/login">
             <ShinyButton className="!bg-background p-2">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 text-sm ">
                 Get Started
                 <ArrowRight className="h-4 w-4" />
               </div>
