@@ -38,7 +38,7 @@ export default async function AuthPanel() {
           >
             <Button type="submit" className="w-full" variant="outline">
               <GoogleIcon />
-              <span>Continue with Google</span>
+              <span>Conti nue with Google</span>
             </Button>
           </form>
           <form

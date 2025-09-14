@@ -15,25 +15,31 @@ export default function Home() {
       </div>
 
       <div className="relative z-10 w-full flex flex-col items-center justify-center gap-6 md:gap-8 px-2 md:mt-0 -mt-6 min-h-[calc(100vh-200px)]">
-        <h2 className="text-5xl md:text-6xl font-bold text-center animate-in fade-in slide-in-from-top-6 duration-1000 ease-out delay-300"
+        <h2
+          className="text-5xl md:text-6xl font-bold text-center animate-in fade-in slide-in-from-top-6 duration-1000 ease-out delay-300"
           style={{
-            animationFillMode: 'both'
-          }}>
+            animationFillMode: "both",
+          }}
+        >
           Fly shorter, Reach further
         </h2>
-        <p className="text-center max-w-4xl text-[15px] md:text-lg animate-in fade-in zoom-in-95 duration-700 ease-out delay-300"
+        <p
+          className="text-center max-w-4xl text-[15px] md:text-lg animate-in fade-in zoom-in-95 duration-700 ease-out delay-300"
           style={{
-            animationFillMode: 'both'
-          }}>
+            animationFillMode: "both",
+          }}
+        >
           Short links, smart insights. Open-source URL shortener designed for developers who demand control, built with
           modern web technologies and scalable architecture.
         </p>
-        <div className="flex items-center gap-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 ease-out delay-300"
+        <div
+          className="flex items-center gap-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 ease-out delay-300"
           style={{
-            animationFillMode: 'both'
-          }}>
+            animationFillMode: "both",
+          }}
+        >
           <Link href="/dashboard">
-            <Button variant="default" className="md:text-base p-5 md:p-6 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+            <Button variant="default" className="md:text-base p-5 md:p-6 transition-all duration-300 ">
               <Link2 className="size-5" />
               Shorten a link
             </Button>
@@ -44,7 +50,10 @@ export default function Home() {
             rel="noopener noreferrer"
             aria-label="Cutfly on GitHub"
           >
-            <Button variant="secondary" className="md:text-base p-5 md:p-6 border bg-background transition-all duration-300 hover:scale-105 hover:shadow-lg">
+            <Button
+              variant="secondary"
+              className="md:text-base p-5 md:p-6 border bg-background transition-all duration-300"
+            >
               <GitHubIcon />
               Star on Github
             </Button>
