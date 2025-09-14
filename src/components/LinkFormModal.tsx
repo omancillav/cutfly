@@ -14,6 +14,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import { Link } from "lucide-react";
 import { toast } from "sonner";
 import { LinkForm } from "./LinkForm";
+import { BorderBeam } from "./magicui/border-beam";
 
 interface Link {
   code: string;
@@ -90,6 +91,22 @@ export function LinkFormModal({
       <Dialog open={isOpen} onOpenChange={handleOpenChange}>
         <DialogTrigger asChild>{triggerButton}</DialogTrigger>
         <DialogContent className="sm:max-w-[450px]">
+          <BorderBeam
+            borderWidth={1}
+            size={100}
+            duration={10}
+            colorFrom="#ffffff"
+            colorTo="#808080"
+            className="hidden dark:block"
+          />
+          <BorderBeam
+            borderWidth={2}
+            size={120}
+            duration={10}
+            colorFrom="#000000"
+            colorTo="#aaaaaa"
+            className="dark:hidden"
+          />
           <DialogHeader className="mb-2">
             <DialogTitle>{editMode ? "Edit link" : "Create a link"}</DialogTitle>
             <DialogDescription className="hidden">
