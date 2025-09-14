@@ -3,8 +3,8 @@ import { signIn as authSignIn, signOut as authSignOut, auth } from "@/auth";
 
 export { auth };
 
-export async function signIn() {
-  await authSignIn("github", { redirectTo: "/dashboard" });
+export async function signIn(provider: "github" | "google") {
+  await authSignIn(provider, { redirectTo: "/dashboard" });
 }
 
 export async function signOut() {

@@ -1,6 +1,7 @@
 import NextAuth, { DefaultSession } from "next-auth";
 import GitHub from "next-auth/providers/github";
-import { createOrVerifyUser, getUserIdByGithubId, getUserByGithubId } from "@/lib/db-auth";
+import Google from "next-auth/providers/google";
+import { createOrUpdateUser, getUserIdByEmail } from "@/lib/db-auth";
 
 declare module "next-auth" {
   interface Session {
@@ -25,49 +26,45 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientId: process.env.GITHUB_ID!,
       clientSecret: process.env.GITHUB_SECRET!,
     }),
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
   ],
   callbacks: {
-    async signIn({ user, account, profile }) {
-      if (account?.provider === "github" && profile) {
-        return await createOrVerifyUser(
-          String(account.providerAccountId),
-          String(profile.login || profile.name || ""),
-          String(user.email || ""),
-          String(user.name || "")
-        );
+    async signIn({ user, account }) {
+      if (!user.email) {
+        console.error("Email not provided by the authentication provider.");
+        return false;
       }
-      return true;
-    },
-    async jwt({ token, account, profile }) {
-      if (account?.provider === "github" && profile) {
-        // Obtener el ID del usuario de la base de datos
-        const userId = await getUserIdByGithubId(String(account.providerAccountId));
 
+      if (account?.provider === "github" || account?.provider === "google") {
+        return await createOrUpdateUser({
+          email: user.email,
+          name: user.name,
+          image: user.image,
+          provider: account.provider,
+          providerAccountId: account.providerAccountId,
+        });
+      }
+
+      return false;
+    },
+    async jwt({ token, user }) {
+      if (user?.email) {
+        const userId = await getUserIdByEmail(user.email);
         if (userId) {
           token.uid = userId;
-          token.github_id = String(account.providerAccountId);
         }
       }
       return token;
     },
     async session({ session, token }) {
-      if (token?.uid && token?.github_id) {
-        session.user.id = String(token.uid);
-
-        // Obtener información actualizada del usuario desde la base de datos
-        const userData = await getUserByGithubId(String(token.github_id));
-        if (userData) {
-          session.user.name = String(userData.name);
-          session.user.email = String(userData.email);
-          session.user.username = String(userData.username);
-        }
+      if (session.user && token.uid) {
+        session.user.id = token.uid as string;
       }
       return session;
     },
-  },
-  session: {
-    strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 días
   },
   pages: {
     signIn: "/login",
