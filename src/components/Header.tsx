@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ArrowRight } from "lucide-react";
+import { ShinyButton } from "./magicui/shiny-button";
 
 export async function Header() {
   const session = await auth();
@@ -93,10 +94,12 @@ export async function Header() {
           </DropdownMenu>
         ) : (
           <Link href="/login">
-            <Button variant="outline" className="!bg-background">
-              Get Started
-              <ArrowRight className="h-4 w-4" />
-            </Button>
+            <ShinyButton className="!bg-background p-2">
+              <div className="flex items-center gap-2 text-sm ">
+                Get Started
+                <ArrowRight className="h-4 w-4" />
+              </div>
+            </ShinyButton>
           </Link>
         )}
       </div>
