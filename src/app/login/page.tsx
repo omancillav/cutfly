@@ -16,7 +16,7 @@ export default async function AuthPanel() {
 
   return (
     <main className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)]">
-      <Card className="min-w-[300px] md:min-w-[400px] text-center z-20">
+      <Card className="min-w-[350px] md:min-w-[400px] text-center z-20">
         <CardHeader className="flex flex-col items-center justify-center gap-3">
           <Image
             src="/cutfly_logo.webp"
@@ -29,7 +29,7 @@ export default async function AuthPanel() {
           <CardTitle className="text-xl font-bold">Log in to Cutfly</CardTitle>
           <CardDescription>Please log in using one of the providers below</CardDescription>
         </CardHeader>
-        <CardContent className="flex flex-col gap-2 md:gap-2">
+        <CardContent className="flex flex-col gap-2.5 p-4">
           <form
             action={async () => {
               "use server";
