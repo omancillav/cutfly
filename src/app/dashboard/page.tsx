@@ -20,14 +20,20 @@ export default async function Dashboard() {
   return (
     <div className="py-4 w-full flex flex-col">
       <div className="flex justify-between items-center gap-2 mb-3 md:mb-4">
-        <div className="relative flex items-center gap-2 border px-4 py-2 rounded-md text-sm animate-in fade-in slide-in-from-left-4 duration-500 ease-out">
+        <div className="relative flex items-center gap-2 border px-4 py-2 rounded-md text-sm animate-in fade-in slide-in-from-left-4 duration-500 ease-out"
+          style={{
+            animationFillMode: 'both'
+          }}>
           <BorderBeam duration={8} size={30} colorTo="#808080" colorFrom="#000000" className="dark:hidden" />
           <BorderBeam duration={8} size={30} colorTo="#aaaaaa" colorFrom="#ffffff" className="hidden dark:block" />
           <Box className="w-4 h-4" />
           <span>{linksCount.toString().padStart(2, "0")}/30</span>
         </div>
 
-        <div className="flex justify-end w-full animate-in fade-in slide-in-from-right-4 duration-500 ease-out delay-150">
+        <div className="flex justify-end w-full animate-in fade-in slide-in-from-right-4 duration-500 ease-out delay-150"
+          style={{
+            animationFillMode: 'both'
+          }}>
           <LinkFormModal linksCount={linksCount} />
         </div>
       </div>
