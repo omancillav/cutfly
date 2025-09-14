@@ -1,8 +1,10 @@
 import { Card, CardContent, CardTitle, CardHeader, CardDescription } from "@/components/ui/card";
 import { GitHubIcon } from "@/assets/github-icon";
+import { GoogleIcon } from "@/assets/google-icon";
 import { signIn, auth } from "@/lib/auth-actions";
 import { redirect } from "next/navigation";
 import { RainbowButton } from "@/components/magicui/rainbow-button";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export default async function AuthPanel() {
@@ -25,16 +27,27 @@ export default async function AuthPanel() {
             priority={true}
           />
           <CardTitle className="text-xl font-bold">Log in to Cutfly</CardTitle>
-          <CardDescription>Please log in using your GitHub account</CardDescription>
+          <CardDescription>Please log in using one of the providers below</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex flex-col gap-2 md:gap-2">
           <form
             action={async () => {
               "use server";
-              await signIn();
+              await signIn("google");
             }}
           >
-            <RainbowButton type="submit" className="w-full">
+            <Button type="submit" className="w-full" variant="outline">
+              <GoogleIcon />
+              <span>Continue with Google</span>
+            </Button>
+          </form>
+          <form
+            action={async () => {
+              "use server";
+              await signIn("github");
+            }}
+          >
+            <RainbowButton type="submit" className="w-full rounded-lg">
               <GitHubIcon />
               Continue with GitHub
             </RainbowButton>
