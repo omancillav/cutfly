@@ -30,13 +30,13 @@ export const createLink = async (data: LinkData): Promise<CreateLinkResult> => {
 
     // Validar que el código no sea una ruta protegida
     if (isProtectedRoute(data.code)) {
-      return { success: false, error: "Code already exists. Please choose a different short code.", field: "code" };
+      return { success: false, error: "Code already in use. Please choose a different short code.", field: "code" };
     }
 
     // Validar que el código no exista
     const codeExists = await checkCodeExists(data.code);
     if (codeExists) {
-      return { success: false, error: "Code already exists. Please choose a different short code.", field: "code" };
+      return { success: false, error: "Code already in use. Please choose a different short code.", field: "code" };
     }
 
     const res = await turso.execute("INSERT INTO links (user_id, url, code, description) VALUES (?, ?, ?, ?)", [
@@ -67,12 +67,12 @@ export const updateLink = async (originalCode: string, data: LinkData): Promise<
     if (originalCode !== data.code) {
       // Validar que el código no sea una ruta protegida
       if (isProtectedRoute(data.code)) {
-        return { success: false, error: "Code already exists. Please choose a different short code.", field: "code" };
+        return { success: false, error: "Code already in use. Please choose a different short code.", field: "code" };
       }
 
       const codeExists = await checkCodeExists(data.code);
       if (codeExists) {
-        return { success: false, error: "Code already exists. Please choose a different short code.", field: "code" };
+        return { success: false, error: "Code already in use. Please choose a different short code.", field: "code" };
       }
     }
 
