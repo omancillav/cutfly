@@ -24,7 +24,7 @@ export const checkCodeExists = async (code: string): Promise<boolean> => {
   return res.rows.length > 0;
 };
 
-const PROTECTED_ROUTES = ["dashboard", "login", "api"];
+const PROTECTED_ROUTES = ["dashboard", "login", "api", "profile"];
 
 export const isProtectedRoute = (code: string): boolean => {
   return PROTECTED_ROUTES.includes(code.toLowerCase());
