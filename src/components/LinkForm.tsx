@@ -156,9 +156,11 @@ export function LinkForm({ onSuccess, editMode = false, linkData }: LinkFormProp
                 </div>
               </FormControl>
               <FormMessage className="text-sm" />
-              <span className="text-xs text-muted-foreground md:hidden">
-                <strong className="font-semibold">Note:</strong> Editing the link disables the previous one.
-              </span>
+              {editMode && (
+                <span className="text-xs text-muted-foreground md:hidden">
+                  <strong className="font-semibold">Note:</strong> Editing the link disables the previous one.
+                </span>
+              )}
             </FormItem>
           )}
         />
