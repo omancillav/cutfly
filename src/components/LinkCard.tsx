@@ -1,11 +1,12 @@
 "use client";
+import Link from "next/link";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChartNoAxesColumn, Link2, ChevronDown, ChevronUp } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 import { Actions } from "./actions";
-import Link from "next/link";
-import { useState } from "react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface LinkData {
   code: string;
@@ -36,15 +37,16 @@ export function LinkCard({ link }: { link: LinkData }) {
       </CardHeader>
 
       <CardContent className="flex flex-col gap-2">
-        <Link
-          href={link.url}
-          className="text-sm text-muted-foreground line-clamp-1 break-all hover:underline transition-colors"
-          target="_blank"
-          rel="noopener noreferrer"
-          title={link.url}
-        >
-          <Link2 size={16} className="inline mr-1" aria-label="External link" />
-          {link.url}
+        <Link href={link.url} target="_blank" rel="noopener noreferrer">
+          <Tooltip>
+            <TooltipTrigger className="text-left text-sm text-muted-foreground line-clamp-1 break-all cursor-pointer">
+              <Link2 size={16} className="inline mr-1" aria-label="External link" />
+              {link.url}
+            </TooltipTrigger>
+            <TooltipContent className="max-w-md break-words text-xs" side="bottom">
+              {link.url}
+            </TooltipContent>
+          </Tooltip>
         </Link>
 
         <div className="flex justify-between items-center mt-1">
@@ -74,7 +76,6 @@ export function LinkCard({ link }: { link: LinkData }) {
           </time>
         </div>
 
-        {/* Descripción expandible con animación */}
         <div
           className={`overflow-hidden transition-all duration-300 ease-in-out ${
             isExpanded ? "max-h-40 opacity-100 mt-2" : "max-h-0 opacity-0"
