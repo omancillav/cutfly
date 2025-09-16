@@ -16,7 +16,10 @@ export default async function AuthPanel() {
 
   return (
     <main className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)]">
-      <Card className="min-w-[350px] md:min-w-[400px] text-center z-20">
+      <Card
+        className="min-w-[350px] md:min-w-[400px] lg:min-w-[450px] animate-in fade-in slide-in-from-bottom-6 duration-1000 ease-out"
+        style={{ animationFillMode: "both" }}
+      >
         <CardHeader className="flex flex-col items-center justify-center gap-3">
           <Image
             src="/cutfly_logo.webp"
