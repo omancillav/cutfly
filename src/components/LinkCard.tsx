@@ -43,7 +43,7 @@ export function LinkCard({ link }: { link: LinkData }) {
               <Link2 size={16} className="inline mr-1" aria-label="External link" />
               {link.url}
             </TooltipTrigger>
-            <TooltipContent className="max-w-md break-words text-xs" side="bottom">
+            <TooltipContent className="max-w-md break-words text-xs hidden md:block" side="bottom">
               {link.url}
             </TooltipContent>
           </Tooltip>

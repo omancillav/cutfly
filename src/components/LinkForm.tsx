@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { toast } from "sonner";
+import { Info } from "lucide-react";
 import { linkFormSchema } from "@/schemas/LinkSchema";
 import { createLink, updateLink } from "@/lib/actions";
 
@@ -121,21 +123,42 @@ export function LinkForm({ onSuccess, editMode = false, linkData }: LinkFormProp
             <FormItem>
               <FormLabel className="text-sm">Short Code</FormLabel>
               <FormControl>
-                <Input
-                  className="text-sm"
-                  placeholder="mylink"
-                  {...field}
-                  maxLength={20}
-                  autoComplete="off"
-                  onChange={(e) => {
-                    field.onChange(e);
-                    if (form.formState.errors.code?.type === "manual") {
-                      form.clearErrors("code");
-                    }
-                  }}
-                />
+                <div className="relative">
+                  <Input
+                    className="text-sm pr-8"
+                    placeholder="mylink"
+                    {...field}
+                    maxLength={20}
+                    autoComplete="off"
+                    onChange={(e) => {
+                      field.onChange(e);
+                      if (form.formState.errors.code?.type === "manual") {
+                        form.clearErrors("code");
+                      }
+                    }}
+                  />
+                  {editMode && (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Info
+                          size={16}
+                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors z-[70] hidden md:block"
+                        />
+                      </TooltipTrigger>
+                      <TooltipContent className="max-w-xs z-[70]">
+                        <p className="text-xs">
+                          Editing the custom link will remove access from the previous link and it will be available to
+                          everyone.
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  )}
+                </div>
               </FormControl>
               <FormMessage className="text-sm" />
+              <span className="text-xs text-muted-foreground md:hidden">
+                <strong className="font-semibold">Note:</strong> Editing the link disables the previous one.
+              </span>
             </FormItem>
           )}
         />
