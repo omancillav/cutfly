@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { LogOut, User } from "lucide-react";
+import { LogOut, User, ArrowRight, LayoutDashboard } from "lucide-react";
 import { GitHubIcon } from "@/assets/github-icon";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { auth, signOut } from "@/lib/auth-actions";
@@ -12,7 +12,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ArrowRight } from "lucide-react";
 import { ShinyButton } from "./magicui/shiny-button";
 
 export async function Header() {
@@ -67,6 +66,14 @@ export async function Header() {
                 <span className="text-xs text-muted-foreground">{session.user.email}</span>
               </div>
               <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard" className="w-full">
+                  <div className="flex items-center gap-2 w-full text-sm py-1">
+                    <LayoutDashboard className="h-4 w-4" />
+                    Dashboard
+                  </div>
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/profile" className="w-full">
                   <div className="flex items-center gap-2 w-full text-sm py-1">
