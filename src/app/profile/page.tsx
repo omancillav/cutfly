@@ -9,6 +9,7 @@ import { ExportLinksButton } from "@/components/ExportLinksButton";
 import { DeleteAccountButton } from "@/components/DeleteAccountButton";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default async function ProfilePage() {
   const session = await auth();
@@ -34,6 +35,36 @@ export default async function ProfilePage() {
             Go to Dashboard
           </Button>
         </Link>
+
+        {/* User Profile Header */}
+        <Card
+          className="animate-in fade-in slide-in-from-bottom-6 duration-1000 ease-out delay-150"
+          style={{
+            animationFillMode: "both",
+          }}
+        >
+          <CardContent className="pt-6">
+            <div className="flex flex-col items-center text-center space-y-4">
+              {/* Avatar */}
+              <div className="relative">
+                <Image
+                  src={`https://api.dicebear.com/9.x/glass/webp?seed=${encodeURIComponent(
+                    session.user.email || session.user.name || "default"
+                  )}`}
+                  alt="Profile"
+                  width={80}
+                  height={80}
+                  className="w-20 h-20 rounded-full ring-4 ring-primary/10"
+                />
+              </div>
+
+              {/* User Info */}
+              <div className="space-y-1">
+                <h2 className="text-2xl font-bold text-foreground">{name || "User"}</h2>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Profile Information */}
         <Card
