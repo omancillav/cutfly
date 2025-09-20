@@ -1,8 +1,8 @@
 import { Card, CardContent, CardTitle, CardHeader, CardDescription } from "@/components/ui/card";
 import { auth } from "@/lib/auth-actions";
 import { redirect } from "next/navigation";
-import { GoogleLoginButton } from "@/components/GoogleLoginButton";
-import { GitHubLoginButton } from "@/components/GithubLoginButton";
+import { GoogleLoginButton } from "@/components/auth/GoogleLoginButton";
+import { GitHubLoginButton } from "@/components/auth/GithubLoginButton";
 import Image from "next/image";
 
 export default async function AuthPanel() {

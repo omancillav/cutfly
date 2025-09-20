@@ -1,5 +1,5 @@
 import { Link } from "lucide-react";
-import { Meteors } from "./magicui/meteors";
+import { Meteors } from "../magicui/meteors";
 
 export function NoLinks() {
   return (

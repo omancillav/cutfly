@@ -1,9 +1,9 @@
 import { auth } from "@/lib/auth-actions";
 import { redirect } from "next/navigation";
 import { getLinksByUserId } from "@/lib/data";
-import { LinkCard } from "@/components/LinkCard";
-import { LinkFormModal } from "@/components/LinkFormModal";
-import { NoLinks } from "@/components/NoLinks";
+import { LinkCard } from "@/components/dashboard/LinkCard";
+import { LinkFormModal } from "@/components/dashboard/LinkFormModal";
+import { NoLinks } from "@/components/dashboard/NoLinks";
 import { Box } from "lucide-react";
 import { BorderBeam } from "@/components/magicui/border-beam";
 

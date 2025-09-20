@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { geist as font } from "@/ui/fonts";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/shared/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
-import { Header } from "@/components/Header";
+import { Header } from "@/components/shared/Header";
 import "./globals.css";
 
 export const metadata: Metadata = {

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ConfirmationDialog } from "@/components/ConfirmationDialog";
+import { ConfirmationDialog } from "../shared/ConfirmationDialog";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { deleteUserAccountAction } from "@/lib/actions";
