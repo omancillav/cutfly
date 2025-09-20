@@ -1,7 +1,6 @@
 import { getLinkByCode } from "@/lib/data";
 import { incrementClicks } from "@/lib/actions";
-import { redirect } from "next/navigation";
-import { notFound } from "next/navigation";
+import { redirect, notFound } from "next/navigation";
 
 interface PageProps {
   params: {
@@ -10,7 +9,7 @@ interface PageProps {
 }
 
 export default async function RedirectPage({ params }: PageProps) {
-  const { code } = await params;
+  const { code } = params;
 
   let link;
 

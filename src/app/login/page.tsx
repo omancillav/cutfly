@@ -1,10 +1,8 @@
 import { Card, CardContent, CardTitle, CardHeader, CardDescription } from "@/components/ui/card";
-import { GitHubIcon } from "@/assets/github-icon";
-import { GoogleIcon } from "@/assets/google-icon";
-import { signIn, auth } from "@/lib/auth-actions";
+import { auth } from "@/lib/auth-actions";
 import { redirect } from "next/navigation";
-import { RainbowButton } from "@/components/magicui/rainbow-button";
-import { Button } from "@/components/ui/button";
+import { GoogleLoginButton } from "@/components/GoogleLoginButton";
+import { GitHubLoginButton } from "@/components/GithubLoginButton";
 import Image from "next/image";
 
 export default async function AuthPanel() {
@@ -30,31 +28,13 @@ export default async function AuthPanel() {
             priority={true}
           />
           <CardTitle className="text-xl font-bold">Log in to Cutfly</CardTitle>
-          <CardDescription>Please log in using one of the providers below</CardDescription>
+          <CardDescription className="text-center">
+            Please log in using your favorite provider to continue
+          </CardDescription>
         </CardHeader>
-        <CardContent className="flex flex-col gap-2.5 p-4">
-          <form
-            action={async () => {
-              "use server";
-              await signIn("google");
-            }}
-          >
-            <Button type="submit" className="w-full py-4.5 md:py-4" variant="outline">
-              <GoogleIcon />
-              <span>Continue with Google</span>
-            </Button>
-          </form>
-          <form
-            action={async () => {
-              "use server";
-              await signIn("github");
-            }}
-          >
-            <RainbowButton type="submit" className="w-full rounded-lg py-4.5 md:py-4">
-              <GitHubIcon />
-              Continue with GitHub
-            </RainbowButton>
-          </form>
+        <CardContent className="flex flex-col gap-2.5 px-4">
+          <GoogleLoginButton />
+          <GitHubLoginButton />
         </CardContent>
       </Card>
     </main>
