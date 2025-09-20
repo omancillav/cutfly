@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Copy, Pen, Trash } from "lucide-react";
 import { deleteLink } from "@/lib/actions";
 import { toast } from "sonner";
-import { ConfirmationDialog } from "./ConfirmationDialog";
+import { ConfirmationDialog } from "../shared/ConfirmationDialog";
 import { LinkFormModal } from "./LinkFormModal";
 
 interface Link {

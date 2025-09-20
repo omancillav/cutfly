@@ -14,7 +14,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import { Link } from "lucide-react";
 import { toast } from "sonner";
 import { LinkForm } from "./LinkForm";
-import { BorderBeam } from "./magicui/border-beam";
+import { BorderBeam } from "../magicui/border-beam";
 
 interface Link {
   code: string;

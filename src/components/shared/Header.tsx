@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { LogOut, User, ArrowRight, LayoutDashboard } from "lucide-react";
 import { GitHubIcon } from "@/assets/github-icon";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { ThemeToggle } from "./theme-toggle";
 import { auth, signOut } from "@/lib/auth-actions";
 import {
   DropdownMenu,
@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ShinyButton } from "./magicui/shiny-button";
+import { ShinyButton } from "../magicui/shiny-button";
 
 export async function Header() {
   const session = await auth();
