@@ -6,16 +6,16 @@ A modern, open-source URL shortener built with Next.js 15, designed for develope
 
 ## ✨ Features
 
-- 🔗 **Custom Short Codes** - Create memorable, branded short links
-- 📊 **Click Analytics** - Track link performance with click counters
-- 🎨 **Beautiful UI** - Modern design with dark/light theme support
-- 🔐 **GitHub Authentication** - Secure login with GitHub OAuth
-- 📱 **Responsive Design** - Works perfectly on all devices
-- ⚡ **Fast Performance** - Built with Next.js 15 and optimized for speed
-- 🗄️ **Turso Database** - Powered by SQLite for reliability
-- 🎯 **Protected Routes** - Prevents conflicts with system routes
-- 📈 **Link Management** - Full CRUD operations for your links
-- 🌈 **Animated UI** - Beautiful animations and micro-interactions
+- **Custom Short Codes** - Create memorable, branded short links
+- **Click Analytics** - Track link performance with click counters
+- **Beautiful UI** - Modern design with dark/light theme support
+- **GitHub Authentication** - Secure login with GitHub OAuth
+- **Responsive Design** - Works perfectly on all devices
+- **Fast Performance** - Built with Next.js 15 and optimized for speed
+- **Turso Database** - Powered by SQLite for reliability
+- **Protected Routes** - Prevents conflicts with system routes
+- **Link Management** - Full CRUD operations for your links
+- **Animated UI** - Beautiful animations and micro-interactions
 
 ## 🛠️ Tech Stack
 

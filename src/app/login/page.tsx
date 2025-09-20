@@ -39,7 +39,7 @@ export default async function AuthPanel() {
               await signIn("google");
             }}
           >
-            <Button type="submit" className="w-full" variant="outline">
+            <Button type="submit" className="w-full py-4.5 md:py-4" variant="outline">
               <GoogleIcon />
               <span>Continue with Google</span>
             </Button>
@@ -50,7 +50,7 @@ export default async function AuthPanel() {
               await signIn("github");
             }}
           >
-            <RainbowButton type="submit" className="w-full rounded-lg">
+            <RainbowButton type="submit" className="w-full rounded-lg py-4.5 md:py-4">
               <GitHubIcon />
               Continue with GitHub
             </RainbowButton>
