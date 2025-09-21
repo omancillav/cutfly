@@ -15,8 +15,6 @@ export function GitHubLoginButton() {
     } catch (error) {
       console.error("Error during GitHub sign-in:", error);
       setLoading(false);
-    } finally {
-      setLoading(false);
     }
   };
 

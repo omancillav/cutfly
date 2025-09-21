@@ -15,8 +15,6 @@ export function GoogleLoginButton() {
     } catch (error) {
       console.error("Error during Google sign-in:", error);
       setLoading(false);
-    } finally {
-      setLoading(false);
     }
   };
 
