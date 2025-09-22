@@ -119,11 +119,12 @@ The following routes are automatically protected and cannot be used as short cod
 - `dashboard`
 - `login`
 - `api`
+- `profile`
 
 You can modify this list in [`src/lib/data.ts`](src/lib/data.ts):
 
 ```typescript
-const PROTECTED_ROUTES = ["dashboard", "login", "api"];
+const PROTECTED_ROUTES = ["dashboard", "login", "api", "profile"];
 ```
 
 ### Link Limits
@@ -145,13 +146,28 @@ src/
 │   ├── dashboard/         # Dashboard page
 │   ├── login/            # Authentication page
 │   └── globals.css       # Global styles
-├── components/            # React components
-│   ├── ui/               # UI components (buttons, dialogs, etc.)
-│   ├── magicui/          # Animated UI components
-│   ├── ConfirmationDialog.tsx
-│   ├── Header.tsx
-│   ├── LinkCard.tsx
-│   └── ...
+├── components/            # React components organized by features
+│   ├── dashboard/        # Dashboard-specific components
+│   │   ├── LinkCard.tsx
+│   │   ├── LinkForm.tsx
+│   │   ├── LinkFormModal.tsx
+│   │   ├── NoLinks.tsx
+│   │   └── ExportLinksButton.tsx
+│   ├── auth/            # Authentication components
+│   │   ├── GithubLoginButton.tsx
+│   │   ├── GoogleLoginButton.tsx
+│   │   └── SignOutButton.tsx
+│   ├── profile/         # Profile-specific components
+│   │   ├── ProfileForm.tsx
+│   │   └── DeleteAccountButton.tsx
+│   ├── shared/          # Shared/common components
+│   │   ├── Header.tsx
+│   │   ├── ConfirmationDialog.tsx
+│   │   ├── theme-provider.tsx
+│   │   ├── theme-toggle.tsx
+│   │   └── actions.tsx
+│   ├── ui/              # UI components (buttons, dialogs, etc.)
+│   └── magicui/         # Animated UI components
 ├── lib/                  # Utility functions
 │   ├── actions.ts        # Server actions
 │   ├── data.ts          # Database queries
