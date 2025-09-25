@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link2 } from "lucide-react";
 import { GitHubIcon } from "@/assets/github-icon";
 import { AnimatedGridPattern } from "@/components/magicui/animated-grid-pattern";
+import TextType from "@/components/reactbits/TextType";
 
 export default function Home() {
   return (
@@ -21,7 +22,7 @@ export default function Home() {
             animationFillMode: "both",
           }}
         >
-          Fly shorter, Reach further
+          <TextType text="Fly shorter, Reach further" typingSpeed={70} showCursor={false} />
         </h2>
         <p
           className="text-center max-w-4xl text-[15px] md:text-lg animate-in fade-in zoom-in-95 duration-700 ease-out delay-300"
