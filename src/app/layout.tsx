@@ -3,6 +3,7 @@ import { geist as font } from "@/ui/fonts";
 import { ThemeProvider } from "@/components/shared/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header } from "@/components/shared/Header";
 import "./globals.css";
 
@@ -32,7 +33,8 @@ export default function RootLayout({
               <Toaster position="bottom-right" />
             </div>
           </div>
-          <Analytics />
+          <Analytics debug={false} />
+          <SpeedInsights debug={false} />
         </ThemeProvider>
       </body>
     </html>
