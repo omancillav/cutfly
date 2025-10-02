@@ -1,8 +1,7 @@
 import { Card, CardContent, CardTitle, CardHeader, CardDescription } from "@/components/ui/card";
 import { auth } from "@/lib/auth-actions";
 import { redirect } from "next/navigation";
-import { GoogleLoginButton } from "@/components/auth/GoogleLoginButton";
-import { GitHubLoginButton } from "@/components/auth/GithubLoginButton";
+import LoginButtons from "@/components/auth/LoginButtons";
 import Image from "next/image";
 
 export default async function AuthPanel() {
@@ -32,9 +31,8 @@ export default async function AuthPanel() {
             Please log in using your favorite provider to continue
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex flex-col gap-2.5 px-4">
-          <GoogleLoginButton />
-          <GitHubLoginButton />
+        <CardContent className="flex flex-col px-4">
+          <LoginButtons />
         </CardContent>
       </Card>
     </main>

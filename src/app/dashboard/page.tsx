@@ -46,7 +46,7 @@ export default async function Dashboard() {
         {linksCount === 0 ? (
           <NoLinks />
         ) : (
-          <ul className="overflow-x-hidden">
+          <ul className="overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 w-full">
               {links.map((link, index) => {
                 const code = String(link.code);
