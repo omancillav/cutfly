@@ -26,12 +26,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${font.className} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="relative min-h-svh w-full">
-            <div className="relative z-10 max-w-[1440px] mx-auto w-full px-3 md:px-6 min-h-svh flex flex-col">
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Toaster position="bottom-right" />
-            </div>
+          <div className="relative z-10 max-w-[1440px] mx-auto w-full px-3 md:px-6 min-h-svh flex flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Toaster position="bottom-right" />
           </div>
           <Analytics debug={false} />
           <SpeedInsights debug={false} />
