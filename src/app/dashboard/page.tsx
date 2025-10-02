@@ -18,7 +18,7 @@ export default async function Dashboard() {
   const linksCount = links.length;
 
   return (
-    <div className="py-4 w-full flex flex-col">
+    <div className="py-4 w-full flex flex-col overflow-x-hidden">
       <div className="flex justify-between items-center gap-2 mb-3 md:mb-4">
         <div
           className="relative flex items-center gap-2 border px-4 py-2 rounded-md text-sm animate-in fade-in slide-in-from-left-4 duration-500 ease-out"
@@ -46,7 +46,7 @@ export default async function Dashboard() {
         {linksCount === 0 ? (
           <NoLinks />
         ) : (
-          <ul>
+          <ul className="overflow-x-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 w-full">
               {links.map((link, index) => {
                 const code = String(link.code);
