@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ConfirmationDialog } from "../shared/ConfirmationDialog";
-import { Trash2 } from "lucide-react";
+import { HeartCrack } from "lucide-react";
 import { toast } from "sonner";
 import { deleteUserAccountAction } from "@/lib/actions";
 import { signOut } from "@/lib/auth-actions";
@@ -53,7 +53,7 @@ export function DeleteAccountButton({ userEmail }: { userEmail: string }) {
       }}
       trigger={
         <Button variant="destructive" className="flex-1" disabled={isDeleting} title="Permanently delete account">
-          <Trash2 className="w-4 h-4" />
+          <HeartCrack className="w-4 h-4" />
           {isDeleting ? "Deleting..." : "Delete Account"}
         </Button>
       }
