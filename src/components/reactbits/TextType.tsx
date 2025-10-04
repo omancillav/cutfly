@@ -61,10 +61,10 @@ const TextType = ({
     return Math.random() * (max - min) + min;
   }, [variableSpeed, typingSpeed]);
 
-  const getCurrentTextColor = () => {
+  const getCurrentTextColor = useCallback(() => {
     if (textColors.length === 0) return null; // Sin color personalizado, usar herencia
     return textColors[currentTextIndex % textColors.length];
-  };
+  }, [textColors, currentTextIndex]);
 
   useEffect(() => {
     if (!startOnVisible || !containerRef.current) return;
@@ -165,6 +165,7 @@ const TextType = ({
     variableSpeed,
     onSentenceComplete,
     getCurrentTextColor,
+    getRandomSpeed,
   ]);
 
   const shouldHideCursor =
