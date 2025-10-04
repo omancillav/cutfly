@@ -1,15 +1,21 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { RetroGrid } from "@/components/ui/retro-grid";
 import { Home, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
     <div className="relative w-full overflow-hidden">
+      {/* Lightning Background */}
+      <div className="fixed inset-0 -z-10 w-screen h-screen pointer-events-none">
+        <RetroGrid className="bg-background" />
+      </div>
+
       {/* Main content */}
-      <div className="relative z-10 w-full flex flex-col items-center justify-center gap-6 md:gap-8 px-2 min-h-[calc(100vh-200px)]">
+      <div className="relative z-10 w-full flex flex-col items-center justify-center gap-6 px-2 min-h-[calc(100vh-200px)]">
         {/* 404 Number */}
         <div
-          className="text-8xl md:text-9xl font-bold text-primary/20 animate-in fade-in slide-in-from-top-6 duration-1000 ease-out"
+          className="text-8xl md:text-9xl font-bold text-primary/30 animate-in fade-in slide-in-from-top-6 duration-1000 ease-out"
           style={{
             animationFillMode: "both",
           }}
