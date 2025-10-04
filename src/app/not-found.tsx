@@ -29,13 +29,13 @@ export default function NotFound() {
 
         {/* Description */}
         <p
-          className="text-center max-w-2xl text-[15px text-muted-foreground animate-in fade-in zoom-in-95 duration-700 ease-out delay-300"
+          className="text-center max-w-2xl text-[15px] text-muted-foreground animate-in fade-in zoom-in-95 duration-700 ease-out delay-300"
           style={{
             animationFillMode: "both",
           }}
         >
-          The page you're looking for doesn't exist or has been moved. The link might be broken or the short code may
-          not be valid.
+          The page you&apos;re looking for doesn&apos;t exist or has been moved. The link might be broken or the short
+          code may not be valid.
         </p>
 
         {/* Action buttons */}
