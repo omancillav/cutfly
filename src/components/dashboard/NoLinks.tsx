@@ -5,7 +5,7 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 
 export function NoLinks() {
   const isMobile = useMediaQuery("(max-width: 768px)");
-  
+
   return (
     <div
       className="relative flex flex-col items-center justify-center p-6 border border-dashed rounded-lg overflow-hidden min-h-[200px] animate-in fade-in zoom-in-95 duration-700 ease-out delay-300"
