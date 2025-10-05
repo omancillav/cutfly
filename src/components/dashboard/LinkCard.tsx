@@ -59,12 +59,12 @@ export function LinkCard({ link }: { link: LinkData }) {
             >
               {isExpanded ? (
                 <div className="flex items-center gap-1 justify-start">
-                  Ver menos
+                  See less
                   <ChevronUp size={14} />
                 </div>
               ) : (
                 <div className="flex items-center gap-1 justify-start">
-                  Ver más
+                  See more
                   <ChevronDown size={14} />
                 </div>
               )}
