@@ -46,9 +46,10 @@ export default async function Dashboard() {
         {linksCount === 0 ? (
           <NoLinks />
         ) : (
-          <ul className="overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 w-full">
-              {links.map((link, index) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 w-full overflow-hidden">
+            {links
+              .sort((a, b) => new Date(String(b.created_at)).getTime() - new Date(String(a.created_at)).getTime())
+              .map((link, index) => {
                 const code = String(link.code);
                 const clicks = Number(link.clicks);
                 const url = String(link.url);
@@ -67,8 +68,7 @@ export default async function Dashboard() {
                   </div>
                 );
               })}
-            </div>
-          </ul>
+          </div>
         )}
       </div>
     </div>
