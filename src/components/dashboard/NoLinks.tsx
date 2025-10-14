@@ -17,7 +17,7 @@ export function NoLinks() {
       <Link className="mx-auto mb-3 h-12 w-12 text-muted-foreground relative z-10" />
       <h2 className="text-xl font-bold mb-2 text-center relative z-10">No Links Found</h2>
       <p className="text-muted-foreground text-sm text-center relative z-10">
-        You have not created any links yet. Click the button below to create your first link.
+        You have not created any links yet. Click the button above to create your first link.
       </p>
     </div>
   );
