@@ -3,13 +3,13 @@ import { incrementClicks } from "@/lib/actions";
 import { redirect, notFound } from "next/navigation";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     code: string;
-  };
+  }>;
 }
 
 export default async function RedirectPage({ params }: PageProps) {
-  const { code } = params;
+  const { code } = await params;
 
   let link;
 
