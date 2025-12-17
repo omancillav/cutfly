@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
-import { Copy, Pen, Trash } from "lucide-react";
+import { Copy, Pen, Trash, QrCode } from "lucide-react";
 import { deleteLink } from "@/lib/actions";
 import { toast } from "sonner";
 import { ConfirmationDialog } from "../shared/ConfirmationDialog";
 import { LinkFormModal } from "./LinkFormModal";
+import { QRCodeModal } from "./QRCodeModal";
 
 interface Link {
   code: string;
@@ -43,6 +44,10 @@ export function Actions({ linkData }: { linkData: Link }) {
 
   return (
     <div className="flex items-center gap-3">
+      <QRCodeModal 
+        linkCode={linkData.code}
+        trigger={<QrCode size={16} className="cursor-pointer hover:opacity-80" />}
+      />
       <Copy onClick={handleCopy} size={16} className="cursor-pointer hover:opacity-80" />
       <LinkFormModal
         editMode={true}
@@ -59,7 +64,7 @@ export function Actions({ linkData }: { linkData: Link }) {
         requireConfirmation={{
           text: linkData.code,
           placeholder: "Type the link code to confirm",
-          confirmationText: `To confirm deletion, type "${linkData.code}" in the box below:`
+          confirmationText: `To confirm deletion, type "${linkData.code}" in the box below:`,
         }}
         trigger={<Trash size={16} className="cursor-pointer hover:opacity-80" />}
       />
