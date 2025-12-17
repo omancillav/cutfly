@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import QRCodeStyling from "qr-code-styling";
 import { Button } from "@/components/ui/button";
-import { Download, Copy, Check } from "lucide-react";
+import { Download, Copy, Check, Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
@@ -72,12 +72,51 @@ export function QRCodeGenerator({ url, linkCode }: QRCodeGeneratorProps) {
     }
   };
 
-  const handleDownloadSVG = () => {
-    if (qrCode) {
-      qrCode.download({
-        name: `qr-${linkCode}`,
-        extension: "svg",
-      });
+  const handleShare = async () => {
+    if (!qrCode) return;
+
+    try {
+      // Convertir el QR a blob
+      const rawData = await qrCode.getRawData("png");
+      if (!rawData) {
+        toast.error("Error generating QR code image");
+        return;
+      }
+
+      // Convertir a Blob si es necesario
+      let blob: Blob;
+      if (rawData instanceof Blob) {
+        blob = rawData;
+      } else {
+        // Si es Buffer, convertir a ArrayBuffer primero
+        const arrayBuffer = rawData instanceof ArrayBuffer 
+          ? rawData 
+          : new Uint8Array(rawData as Buffer).buffer;
+        blob = new Blob([arrayBuffer], { type: "image/png" });
+      }
+
+      const file = new File([blob], `qr-${linkCode}.png`, { type: "image/png" });
+
+      // Verificar si la Web Share API está disponible
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: `QR Code for /${linkCode}`,
+          text: `QR Code for ${url}`,
+        });
+      } else {
+        // Fallback: descargar la imagen
+        qrCode.download({
+          name: `qr-${linkCode}`,
+          extension: "png",
+        });
+        toast.info("Sharing not available, downloading instead");
+      }
+    } catch (error) {
+      // Usuario canceló o error
+      if (error instanceof Error && error.name !== "AbortError") {
+        console.error("Error sharing:", error);
+      }
     }
   };
 
@@ -125,12 +164,12 @@ export function QRCodeGenerator({ url, linkCode }: QRCodeGeneratorProps) {
           Download PNG
         </Button>
         <Button
-          onClick={handleDownloadSVG}
+          onClick={handleShare}
           className="flex-1 gap-2"
           variant="outline"
         >
-          <Download size={16} />
-          Download SVG
+          <Share2 size={16} />
+          Share
         </Button>
       </div>
     </div>
