@@ -11,7 +11,7 @@ export default function Home() {
       <div className="fixed inset-0 -z-10 w-screen h-screen pointer-events-none">
         <AnimatedGridPattern
           maxOpacity={0.05}
-          className="[mask-image:radial-gradient(ellipse_at_center,white_40%,transparent_90%)]"
+          className="mask-[radial-gradient(ellipse_at_center,white_40%,transparent_90%)]"
         />
       </div>
 
