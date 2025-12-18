@@ -9,8 +9,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ArrowUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export function SortLinks() {
+export function SortLinks({ className }: { className?: string }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const sort = searchParams.get("sort") || "date-desc";
@@ -24,7 +25,7 @@ export function SortLinks() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="gap-2 px-3 sm:px-4">
+        <Button variant="outline" className={cn("gap-2 px-3 sm:px-4", className)}>
           <span className="hidden sm:inline">Sort</span>
           <ArrowUpDown className="size-4" />
         </Button>
