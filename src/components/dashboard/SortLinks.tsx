@@ -24,8 +24,8 @@ export function SortLinks() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="gap-2">
-          <span>Sort</span>
+        <Button variant="outline" className="gap-2 px-3 sm:px-4">
+          <span className="hidden sm:inline">Sort</span>
           <ArrowUpDown className="size-4" />
         </Button>
       </DropdownMenuTrigger>
