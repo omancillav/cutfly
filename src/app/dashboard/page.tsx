@@ -60,8 +60,8 @@ export default async function Dashboard({
             animationFillMode: "both",
           }}
         >
-          <SortLinks />
           <LinkFormModal linksCount={linksCount} />
+          <SortLinks />
         </div>
       </div>
 
