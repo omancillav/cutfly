@@ -3,19 +3,41 @@ import { redirect } from "next/navigation";
 import { getLinksByUserId } from "@/lib/data";
 import { LinkCard } from "@/components/dashboard/LinkCard";
 import { LinkFormModal } from "@/components/dashboard/LinkFormModal";
+import { SortLinks } from "@/components/dashboard/SortLinks";
 import { NoLinks } from "@/components/dashboard/NoLinks";
 import { Box } from "lucide-react";
 import { BorderBeam } from "@/components/magicui/border-beam";
 
-export default async function Dashboard() {
+export default async function Dashboard({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   const session = await auth();
 
   if (!session?.user) {
     redirect("/login");
   }
 
+  const resolvedSearchParams = await searchParams;
+  const sort = typeof resolvedSearchParams.sort === "string" ? resolvedSearchParams.sort : "date-desc";
+
   const links = await getLinksByUserId(Number(session.user.id));
   const linksCount = links.length;
+
+  const sortedLinks = [...links].sort((a, b) => {
+    switch (sort) {
+      case "date-asc":
+        return new Date(String(a.created_at)).getTime() - new Date(String(b.created_at)).getTime();
+      case "clicks-desc":
+        return Number(b.clicks) - Number(a.clicks);
+      case "clicks-asc":
+        return Number(a.clicks) - Number(b.clicks);
+      case "date-desc":
+      default:
+        return new Date(String(b.created_at)).getTime() - new Date(String(a.created_at)).getTime();
+    }
+  });
 
   return (
     <div className="py-4 w-full flex flex-col overflow-x-hidden">
@@ -33,12 +55,13 @@ export default async function Dashboard() {
         </div>
 
         <div
-          className="flex justify-end w-full animate-in fade-in slide-in-from-right-4 duration-500 ease-out delay-150"
+          className="flex justify-end w-full gap-2 animate-in fade-in slide-in-from-right-4 duration-500 ease-out delay-150"
           style={{
             animationFillMode: "both",
           }}
         >
-          <LinkFormModal linksCount={linksCount} />
+          <LinkFormModal linksCount={linksCount} triggerClassName="md:order-2" />
+          <SortLinks className="md:order-1" />
         </div>
       </div>
 
@@ -47,27 +70,25 @@ export default async function Dashboard() {
           <NoLinks />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 w-full overflow-hidden">
-            {links
-              .sort((a, b) => new Date(String(b.created_at)).getTime() - new Date(String(a.created_at)).getTime())
-              .map((link, index) => {
-                const code = String(link.code);
-                const clicks = Number(link.clicks);
-                const url = String(link.url);
-                const description = link.description ? String(link.description) : "";
-                const created_at = String(link.created_at);
-                return (
-                  <div
-                    key={String(link.id)}
-                    className="animate-in fade-in slide-in-from-bottom-4 duration-500 ease-out"
-                    style={{
-                      animationDelay: `${index * 100}ms`,
-                      animationFillMode: "both",
-                    }}
-                  >
-                    <LinkCard link={{ code, url, description, clicks, created_at }} />
-                  </div>
-                );
-              })}
+            {sortedLinks.map((link, index) => {
+              const code = String(link.code);
+              const clicks = Number(link.clicks);
+              const url = String(link.url);
+              const description = link.description ? String(link.description) : "";
+              const created_at = String(link.created_at);
+              return (
+                <div
+                  key={String(link.id)}
+                  className="animate-in fade-in slide-in-from-bottom-4 duration-500 ease-out"
+                  style={{
+                    animationDelay: `${index * 100}ms`,
+                    animationFillMode: "both",
+                  }}
+                >
+                  <LinkCard link={{ code, url, description, clicks, created_at }} />
+                </div>
+              );
+            })}
           </div>
         )}
       </div>

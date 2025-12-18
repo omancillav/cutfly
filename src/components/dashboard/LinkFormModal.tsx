@@ -64,7 +64,7 @@ export function LinkFormModal({
     <div className={`cursor-pointer hover:opacity-80 ${triggerClassName}`}>{buttonIcon || defaultButtonIcon}</div>
   ) : (
     // Para modo creación, renderizar el botón completo
-    <div className={`w-full md:w-fit ${triggerClassName}`}>
+    <div className={`flex-1 md:flex-none md:w-fit ${triggerClassName}`}>
       <Button
         className="w-full md:w-fit"
         disabled={hasReachedLimit}
