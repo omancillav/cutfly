@@ -27,6 +27,7 @@ export function QRCodeGenerator({ url, linkCode }: QRCodeGeneratorProps) {
       width: qrSize,
       height: qrSize,
       data: url,
+      image: "/cutfly_logo.webp",
       margin: 0,
       qrOptions: {
         typeNumber: 0,
@@ -36,7 +37,7 @@ export function QRCodeGenerator({ url, linkCode }: QRCodeGeneratorProps) {
       imageOptions: {
         hideBackgroundDots: true,
         imageSize: 0.4,
-        margin: 8,
+        margin: 15,
       },
       dotsOptions: {
         color: "#000000",
