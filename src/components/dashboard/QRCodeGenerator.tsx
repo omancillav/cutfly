@@ -22,10 +22,15 @@ export function QRCodeGenerator({ url, linkCode }: QRCodeGeneratorProps) {
   const qrSize = isDesktop ? 350 : 280;
 
   useEffect(() => {
+    // Aumentar la resolución para evitar pixelado (Retina/High DPI displays)
+    const resolution = 2;
+    const renderSize = qrSize * resolution;
+    const logoMargin = 15 * resolution;
+
     // Estilo predefinido elegante para el QR
     const qr = new QRCodeStyling({
-      width: qrSize,
-      height: qrSize,
+      width: renderSize,
+      height: renderSize,
       data: url,
       image: "/cutfly_logo.webp",
       margin: 0,
@@ -37,7 +42,7 @@ export function QRCodeGenerator({ url, linkCode }: QRCodeGeneratorProps) {
       imageOptions: {
         hideBackgroundDots: true,
         imageSize: 0.4,
-        margin: 15,
+        margin: logoMargin,
       },
       dotsOptions: {
         color: "#000000",
@@ -132,7 +137,11 @@ export function QRCodeGenerator({ url, linkCode }: QRCodeGeneratorProps) {
     <div className="flex flex-col items-center gap-6 py-4">
       {/* QR Code Preview */}
       <div className="bg-white p-6 rounded-lg shadow-md border">
-        <div ref={qrRef} />
+        <div 
+          ref={qrRef} 
+          style={{ width: qrSize, height: qrSize }} 
+          className="[&>canvas]:w-full [&>canvas]:h-full [&>canvas]:block" 
+        />
       </div>
 
       {/* URL Display with Copy Button */}
