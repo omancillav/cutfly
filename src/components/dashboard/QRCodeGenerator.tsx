@@ -23,7 +23,7 @@ export function QRCodeGenerator({ url, linkCode }: QRCodeGeneratorProps) {
 
   useEffect(() => {
     // Aumentar la resolución para evitar pixelado (Retina/High DPI displays)
-    const resolution = 2;
+    const resolution = 2.5;
     const renderSize = qrSize * resolution;
     const logoMargin = 15 * resolution;
 
