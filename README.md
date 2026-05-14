@@ -43,7 +43,7 @@ A modern, open-source URL shortener built with Next.js 15, designed for develope
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/cutfly.git
+   git clone https://github.com/omancillav/cutfly.git
    cd cutfly
    ```
 
@@ -108,7 +108,7 @@ A modern, open-source URL shortener built with Next.js 15, designed for develope
 
 ### Accessing Short Links
 
-Simply visit: `https://yoursite.com/[code]` and you'll be redirected to the original URL.
+Simply visit: `https://cutfly.vercel.app/[code]` and you'll be redirected to the original URL.
 
 ## 🔧 Configuration
 
