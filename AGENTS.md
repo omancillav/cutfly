@@ -8,6 +8,7 @@
 IMPORTANT: Never create commits, PRs, or push autonomously. Only do so when explicitly asked.
 
 - NEVER add a `Co-Authored-By` line crediting the agent to commit messages.
+- NEVER use emojis in responses, summaries, commit messages, branch names, PR titles or descriptions, documentation, code comments, or any other agent-generated content.
 - Make minimal changes; do not refactor unrelated code.
 - For multi-file or architectural changes, describe the plan and wait for confirmation unless the user already approved that exact scope.
 - Reuse existing patterns and components before creating new ones.
@@ -28,6 +29,7 @@ IMPORTANT: Never create commits, PRs, or push autonomously. Only do so when expl
 
 - Branches: `feature/`, `fix/`, `chore/`.
 - Use Conventional Commits: `feat:`, `fix:`, `chore:`, `refactor:`, `docs:`, etc.
+- When creating a PR, provide only the required title and leave its body or description empty unless the user explicitly requests one.
 
 ## Package Manager
 
